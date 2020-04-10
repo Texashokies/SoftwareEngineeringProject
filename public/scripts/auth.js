@@ -1,0 +1,1 @@
+//All account scripts should go here
