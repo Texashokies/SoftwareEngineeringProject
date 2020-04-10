@@ -1,7 +1,6 @@
 //This is the server side code should only be used to call non-firebase api's
 //Firebase functions should be done clinet side
 const express = require('express');
-const http = require('http');
 const CloudmersiveVirusApiClient = require('cloudmersive-virus-api-client');
 const formidable = require('formidable');
 const fs = require('fs');
