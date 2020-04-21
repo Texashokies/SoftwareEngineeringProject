@@ -3,9 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <title>Software Engineering Project</title>
 </head>
 <body>
-    <h1>Main page</h1>
+
+    <!--Nav bar-->
+    <nav>
+        <div class="nav-wrapper amber darken-2">
+            <a href="#" class="brand-logo">Firechat</a>
+        </div>
+    </nav>
+
+    <!--Logged out UI-->
+
+
+    <div class="container logged-out">
+        <h4 class="center-align">You need an account to further access this website</h1>
+        
+        <!--Sign in card-->
+        <div class="row">
+            <div class = "col s12 m6">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">Already have an account?</span>
+                        <p>You're seeing this because you are logged out. Please sign back in!</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#" class="wave-effect waves-light btn yellow darken-2 modal-trigger" data-target="modal-login">Sign in</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!--Sign up card-->
+        <div class="row">
+            <div class = "col s12 m6">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">Don't have an account?</span>
+                        <p>You should set up an account to chat with your friends!</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#" class="wave-effect waves-light btn yellow darken-2 modal-trigger" data-target="modal-signup">Sign up</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SIGN UP MODAL -->
+    <div id="modal-signup" class="modal">
+        <div class="modal-content">
+        <h4>Sign up</h4><br />
+        <form id="signup-form">
+            <div class="input-field">
+            <input type="email" id="signup-email" required />
+            <label for="signup-email">Email address</label>
+            </div>
+            <div class="input-field">
+            <input type="password" id="signup-password" required />
+            <label for="signup-password">Choose password</label>
+            </div>
+            <button class="btn yellow darken-2 z-depth-0">Sign up</button>
+        </form>
+        </div>
+    </div>
+
+    <!-- LOGIN MODAL -->
+    <div id="modal-login" class="modal">
+        <div class="modal-content">
+        <h4>Login</h4><br />
+        <form id="login-form">
+            <div class="input-field">
+            <input type="email" id="login-email" required />
+            <label for="login-email">Email address</label>
+            </div>
+            <div class="input-field">
+            <input type="password" id="login-password" required />
+            <label for="login-password">Your password</label>
+            </div>
+            <button class="btn yellow darken-2 z-depth-0">Login</button>
+        </form>
+        </div>
+    </div>
+
+    <!--Logged in UI-->
+    <div class="container logged-in">
+        
+    </div>
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-auth.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="scripts/index.js"></script>
+    <script src="scripts/auth.js"></script>
 </body>
 </html>
