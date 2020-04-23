@@ -14,11 +14,11 @@
 <body>
     <!--Nav bar-->
     <nav>
-        <div class="nav-wrapper amber darken-2">
-            <a href="index.html" class="brand-logo">Firechat</a>
+        <div class="nav-wrapper amber darken-2" id="nav-wrapper">
+            <a href="index.html" class="brand-logo" id="logo">Firechat</a>
             <ul id ="nav-mobile" class="right hide-on-med-down">
                 <li class = "logged-in">
-                    <a href="#" class="dropdown-trigger amber lighten-1 btn" data-target="accountDropdown"><i class="material-icons">account_circle</i></a>
+                    <a href="#" class="dropdown-trigger amber lighten-1 btn" data-target="accountDropdown" id="account-dropdown"><i class="material-icons">account_circle</i></a>
                 </li>
             </ul>
         </div>
@@ -36,15 +36,15 @@
         <!--Sign in card-->
         <div class="row">
             <div class = "col s12 m6">
-                <div class="card">
+                <div class="card" id="sign-in-card">
                     <div class="card-content">
                         <span class="card-title">Something went wrong</span>
                         <p>You're seeing this because you are logged out. Please sign back in!</p>
                     </div>
                     <div class="card-action">
-                        <a href="#" class="wave-effect waves-light btn yellow darken-2 modal-trigger" data-target="modal-login">Sign in</a>
+                        <a href="#" class="wave-effect waves-light btn yellow darken-2 modal-trigger" data-target="modal-login" id="sign-in-button">Sign in</a>
                         <p>Don't have an account?</p>
-                        <a href="#" class="wave-effect waves-light btn yellow darken-2 modal-trigger" data-target="modal-signup">Sign Up</a>
+                        <a href="#" class="wave-effect waves-light btn yellow darken-2 modal-trigger" data-target="modal-signup" id="sign-up-button">Sign Up</a>
                     </div>
                 </div>
             </div>
@@ -62,7 +62,7 @@
                     <input type="password" id="login-password" required />
                     <label for="login-password">Your password</label>
                 </div>
-                <button class="btn yellow darken-2 z-depth-0">Login</button>
+                <button class="btn yellow darken-2" id="log-in-button">Login</button>
             </form>
             </div>
         </div>
@@ -84,18 +84,18 @@
                     <input type="password" id="signup-password" required />
                     <label for="signup-password">Choose password</label>
                 </div>
-                <button class="btn yellow darken-2 z-depth-0">Sign up</button>
+                <button class="btn yellow darken-2" id="sign-up-button-modal">Sign up</button>
             </form>
             </div>
         </div>
     </div>
 
     <!-- Logged In Page-->
-    <div class="container logged-in">
+    <div class="container logged-i">
         <!--Profile card-->
         <div class="row">
             <div class = "col s12 m6">
-                <div class="card">
+                <div class="card" id="profile-card">
                     <div class="card-content">
                         <span class="card-title">User Profile</span>
                         <form id="profile-settings-form">
@@ -118,7 +118,7 @@
                     </div>
                     <div class="card-action">
                         <!--Might need to be changed to a button?-->
-                        <a href="#" class="wave-effect waves-light btn yellow darken-2 modal-trigger" data-target="modal-login">Save Settings <i class="small material-icons">save</i></a>
+                        <a href="#" class="wave-effect waves-light btn yellow darken-2" data-target="modal-login" id="user-profile-save-button">Save Settings <i class="small material-icons">save</i></a>
                     </div>
                 </div>
             </div>
@@ -126,7 +126,7 @@
 
         <div class="row">
             <div class = "col s12 m6">
-                <div class="card">
+                <div class="card" id="display-card">
                     <div class="card-content">
                         <span class="card-title">Display Settings</span>
                         <div class="input-field col s12">
@@ -135,15 +135,12 @@
                               <option value="campfire">Camp Fire (Dark)</option>
                               <option value="coldfire">Cold Fire (Dark)</option>
                               <option value="swamp">Swamp (Dark)</option>
-                              <option value="retro">Retro (Dark)</option>
                             </select>
                             <label>Choose your theme</label>
                         </div>
                     </div>
                     <div class="card-action">
-                        
-                        <!--Might need to be changed to a button?-->
-                        <a href="#" class="wave-effect waves-light btn yellow darken-2 modal-trigger" data-target="modal-login">Save Settings <i class="small material-icons">save</i></a>
+                        <button class="wave-effect waves-light btn yellow darken-2" onclick="setThemePreference()" id="save-button">Save Settings <i class="small material-icons">save</i></a>
                     </div>
                 </div>
             </div>
@@ -152,7 +149,7 @@
         <!--Delete Account Card-->
         <div class="row">
             <div class = "col s12 m6">
-                <div class="card">
+                <div class="card" id="delete-card">
                     <div class="card-content">
                         <span class="card-title">Delete Account</span>
                         <form id="delete-form">
@@ -160,7 +157,7 @@
                     </div>
                     <div class="card-action">
                         <!--Might need to be changed to a button?-->
-                        <a href="#" class="wave-effect waves-light btn yellow darken-2 modal-trigger" data-target="modal-delete">Delete Account<i class="small material-icons">delete_forever</i></a>
+                        <a href="#" class="wave-effect waves-light btn yellow darken-2 modal-trigger" data-target="modal-delete" id="delete-button">Delete Account<i class="small material-icons">delete_forever</i></a>
                     </div>
                 </div>
             </div>
@@ -172,7 +169,7 @@
                 <h4>Delete Account</h4>
                 <form id = "delete-modal-form">
                     <p>Please think carefully about this decision. Deleting your account is a permanent action that cannot be undone!</p>
-                    <button class="btn  yellow darken-2">Nevermind.</button>
+                    <button class="btn  yellow darken-2" id="nevermind-button">Nevermind.</button>
                     <button class="btn red accent-4">DELETE ACCOUNT! <i class="small material-icons">delete_forever</i></button>
                 </form>
             </div>
@@ -180,8 +177,10 @@
     </div>
 
     <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-database.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="scripts/settings.js"></script>
+    <script src="scripts/auth.js"></script>
 </body>
 </html>

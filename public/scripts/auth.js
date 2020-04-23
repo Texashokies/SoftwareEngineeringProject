@@ -1,36 +1,56 @@
-//All account scripts should go here
+//Script deals with changing of authentication status
 
-// Your web app's Firebase configuration
-var firebaseConfig = {
-    apiKey: "AIzaSyC6QR79tnkpGKfvhc1d_VM2Pdp8lmwVTSw",
-    authDomain: "software-engineering-pro-3ba1c.firebaseapp.com",
-    databaseURL: "https://software-engineering-pro-3ba1c.firebaseio.com",
-    projectId: "software-engineering-pro-3ba1c",
-    storageBucket: "software-engineering-pro-3ba1c.appspot.com",
-    messagingSenderId: "482967068895",
-    appId: "1:482967068895:web:559182a15c3ba3c1e5c96a"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
+//Firebase should have been initialized by one of the pages own scripts
 
 //make auth and firestore references
-const auth = firebase.auth();
+const authentication = firebase.auth();
 
 
 //Listen for auth status changes log ins and outs
-auth.onAuthStateChanged(user => {
+authentication.onAuthStateChanged(user => {
     console.log(user);
     //Logged in
     if(user){
         console.log("User logged in: ", user);
-        setupUIIndex(user);
-        setupUISettings(user);
-        setupUIChat(user);
+        try {
+            setupUIIndex(user);
+        }
+        catch(err){
+            console.log(err);
+        }
+        try {
+            setupUISettings(user);
+        }
+        catch(err){
+            console.log(err);
+        }
+        try {
+            setupUIChat(user);
+        }
+        catch(err){
+            console.log(err);
+        }
     }
     else{
         console.log("User logged out: ", user);
-        setupUIIndex(user);
-        setupUISettings(user);
-        setupUIChat(user);
+        try {
+            setupUIIndex(user);
+        }
+        catch(err){
+            console.log(err);
+        }
+        try {
+            setupUISettings(user);
+        }
+        catch(err){
+            console.log(err);
+        }
+        try {
+            setupUIChat(user);
+        }
+        catch(err){
+            console.log(err);
+        }
     }
 })
+

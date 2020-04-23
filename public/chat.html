@@ -14,11 +14,11 @@
 
     <!--Nav bar-->
     <nav>
-        <div class="nav-wrapper amber darken-2">
-            <a href="index.html" class="brand-logo">Firechat</a>
+        <div class="nav-wrapper amber darken-2" id="nav-wrapper">
+            <a href="index.html" class="brand-logo" id="logo">Firechat</a>
             <ul id ="nav-mobile" class="right hide-on-med-down">
                 <li class = "logged-in">
-                    <a href="#" class="dropdown-trigger amber lighten-1 btn" data-target="accountDropdown"><i class="material-icons">account_circle</i></a>
+                    <a href="#" class="dropdown-trigger amber lighten-1 btn" data-target="account-dropdown" id="account-dropdown"><i class="material-icons">account_circle</i></a>
                 </li>
             </ul>
         </div>
@@ -35,15 +35,15 @@
         <!--Sign in card-->
         <div class="row">
             <div class = "col s12 m6">
-                <div class="card">
+                <div class="card" id="sign-in-card">
                     <div class="card-content">
                         <span class="card-title">Something went wrong</span>
                         <p>You're seeing this because you are logged out. Please sign back in!</p>
                     </div>
                     <div class="card-action">
-                        <a href="#" class="wave-effect waves-light btn yellow darken-2 modal-trigger" data-target="modal-login">Sign in</a>
+                        <a href="#" class="wave-effect waves-light btn yellow darken-2 modal-trigger" data-target="modal-login" id="sign-in-button">Sign in</a>
                         <p>Don't have an account?</p>
-                        <a href="#" class="wave-effect waves-light btn yellow darken-2 modal-trigger" data-target="modal-signup">Sign Up</a>
+                        <a href="#" class="wave-effect waves-light btn yellow darken-2 modal-trigger" data-target="modal-signup" id="sign-up-button">Sign Up</a>
                     </div>
                 </div>
             </div>
@@ -54,21 +54,21 @@
     <div class="container logged-in">
         <div class="row">
             <div class="col s12 m20">
-            <div class="card">
+            <div class="card" id="chat-card">
                 <div class="card-content white-text">
-                    <span class="card-title" id="chat-title">Chat with</span>
+                    <span class="card-title black-text" id="chat-title">Chat with</span>
                     <ul id="messages"></ul>
                 </div>
                 <div class="card-action">
                     <form onsubmit = "return sendMessage();">
                         <input id="message" placeholder="Enter Message" autocomplete="off">
-                        <button class="btn waves-effect waves-light yellow darken-2 modal-trigger" data-target="translate-modal">
+                        <button class="btn waves-effect waves-light yellow darken-2 modal-trigger" data-target="translate-modal" id="translate-button">
                             <i class="material-icons">g_translate</i>
                         </button>
-                        <button class="btn waves-effect waves-light yellow darken-2 modal-trigger" data-target="file-modal">
+                        <button class="btn waves-effect waves-light yellow darken-2 modal-trigger" data-target="file-modal" id="attach-button">
                             <i class="material-icons">attachment</i>
                         </button>
-                        <button class="btn waves-effect waves-light yellow darken-2" type="submit" name="action">Submit
+                        <button class="btn waves-effect waves-light yellow darken-2" type="submit" name="action" id="submit-button">Submit
                             <i class="material-icons right">send</i>
                         </button>
                     </form>
@@ -300,7 +300,7 @@
                 <input type="password" id="login-password" required />
                 <label for="login-password">Your password</label>
             </div>
-            <button class="btn yellow darken-2 z-depth-0">Login</button>
+            <button class="btn yellow darken-2 z-depth-0" id="sign-in-button-modal">Login</button>
         </form>
         </div>
     </div>
@@ -322,14 +322,16 @@
                 <input type="password" id="signup-password" required />
                 <label for="signup-password">Choose password</label>
             </div>
-            <button class="btn yellow darken-2 z-depth-0">Sign up</button>
+            <button class="btn yellow darken-2 z-depth-0" id="sign-up-button-modal">Sign up</button>
         </form>
         </div>
     </div>
 
     <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-database.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="scripts/chat.js"></script>
+    <script src="scripts/auth.js"></script>
 </body>
 </html>
