@@ -17,7 +17,7 @@
         <div class="nav-wrapper amber darken-2">
             <a href="index.html" class="brand-logo">Firechat</a>
             <ul id ="nav-mobile" class="right hide-on-med-down">
-                <li class = "logged-i">
+                <li class = "logged-in">
                     <a href="#" class="dropdown-trigger amber lighten-1 btn" data-target="accountDropdown"><i class="material-icons">account_circle</i></a>
                 </li>
             </ul>
@@ -43,8 +43,49 @@
                     </div>
                     <div class="card-action">
                         <a href="#" class="wave-effect waves-light btn yellow darken-2 modal-trigger" data-target="modal-login">Sign in</a>
+                        <p>Don't have an account?</p>
+                        <a href="#" class="wave-effect waves-light btn yellow darken-2 modal-trigger" data-target="modal-signup">Sign Up</a>
                     </div>
                 </div>
+            </div>
+        </div>
+         <!-- LOGIN MODAL -->
+         <div id="modal-login" class="modal">
+            <div class="modal-content">
+            <h4>Login</h4><br />
+            <form id="login-form">
+                <div class="input-field">
+                    <input type="email" id="login-email" required />
+                    <label for="login-email">Email address</label>
+                </div>
+                <div class="input-field">
+                    <input type="password" id="login-password" required />
+                    <label for="login-password">Your password</label>
+                </div>
+                <button class="btn yellow darken-2 z-depth-0">Login</button>
+            </form>
+            </div>
+        </div>
+
+        <!-- SIGN UP MODAL -->
+        <div id="modal-signup" class="modal">
+            <div class="modal-content">
+            <h4>Sign up</h4><br />
+            <form id="signup-form">
+                <div class="input-field">
+                    <input type="text" id="username" required/>
+                    <label for="username">Username</label>
+                </div>
+                <div class="input-field">
+                    <input type="email" id="signup-email" required />
+                    <label for="signup-email">Email address</label>
+                </div>
+                <div class="input-field">
+                    <input type="password" id="signup-password" required />
+                    <label for="signup-password">Choose password</label>
+                </div>
+                <button class="btn yellow darken-2 z-depth-0">Sign up</button>
+            </form>
             </div>
         </div>
     </div>
@@ -58,13 +99,16 @@
                     <div class="card-content">
                         <span class="card-title">User Profile</span>
                         <form id="profile-settings-form">
+                            <!--Profile Pic?-->
                             <p id="display-name"></p>
                             <div class="input-field">
+                                <i class="material-icons prefix">account_circle</i>
                                 <input type="text" id="name-field" />
                                 <label for="name-field">Change Display Name</label>
                             </div>
                             <div class="input-field">
                                 <p id="email"></p>
+                                <i class="material-icons prefix">email</i>
                                 <input type="email" id="change-email" />
                                 <label for="change-email">Change Email Address</label>
                             </div>
@@ -86,7 +130,7 @@
                     <div class="card-content">
                         <span class="card-title">Display Settings</span>
                         <div class="input-field col s12">
-                            <select>
+                            <select id="select-theme">
                               <option value="sunny day"selected>Sunny Day (Light)</option>
                               <option value="campfire">Camp Fire (Dark)</option>
                               <option value="coldfire">Cold Fire (Dark)</option>
@@ -94,7 +138,7 @@
                               <option value="retro">Retro (Dark)</option>
                             </select>
                             <label>Choose your theme</label>
-                          </div>
+                        </div>
                     </div>
                     <div class="card-action">
                         
@@ -133,13 +177,11 @@
                 </form>
             </div>
         </div>
-
     </div>
 
     <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-auth.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <!--Can use index js because nothing special about settings-->
     <script src="scripts/settings.js"></script>
 </body>
 </html>

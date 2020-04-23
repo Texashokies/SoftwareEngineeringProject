@@ -25,10 +25,12 @@ auth.onAuthStateChanged(user => {
         console.log("User logged in: ", user);
         setupUIIndex(user);
         setupUISettings(user);
+        setupUIChat(user);
     }
     else{
         console.log("User logged out: ", user);
         setupUIIndex(user);
         setupUISettings(user);
+        setupUIChat(user);
     }
 })

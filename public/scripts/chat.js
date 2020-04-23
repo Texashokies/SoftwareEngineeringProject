@@ -50,22 +50,26 @@ const loggedOutComponents = document.querySelectorAll('.logged-out');
 const loggedInComponents = document.querySelectorAll('.logged-in');
 
 const getUserLoginStatus = () => {
-    setupUISettings(auth.currentUser);
+    setupUIChat(auth.currentUser);
 }
 
-const setupUISettings = (user) => {
+const setupUIChat = (user) => {
     console.log("Set up user is: " , user);
     if(user) {
         //Toggle UI elements
         loggedInComponents.forEach(item => item.style.display = "block");
         loggedOutComponents.forEach(item => item.style.display = 'none');
-        //document.getElementById("user-picture").src = user.photoURL;
-        document.getElementById("display-name").innerHTML = "Display name: " + user.displayName;
-        document.getElementById("email").innerHTML = "Email Address: " + user.email;
     }
     else{
         //Toggle UI elements
         loggedInComponents.forEach(item => item.style.display = "none");
         loggedOutComponents.forEach(item => item.style.display = 'block');
     }
+}
+
+
+//Function for sending a message
+function sendMessage() {
+
+    return false;
 }
