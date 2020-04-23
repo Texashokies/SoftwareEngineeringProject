@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firechat Account Settings</title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    
+</head>
+<body>
+    <!--Nav bar-->
+    <nav>
+        <div class="nav-wrapper amber darken-2">
+            <a href="index.html" class="brand-logo">Firechat</a>
+            <ul id ="nav-mobile" class="right hide-on-med-down">
+                <li class = "logged-i">
+                    <a href="#" class="dropdown-trigger amber lighten-1 btn" data-target="accountDropdown"><i class="material-icons">account_circle</i></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!--Account dropdown-->
+    <ul id="accountDropdown" class="dropdown-content">
+        <li><a href="settings.html"> <i class="small material-icons">settings</i> Settings</a></li>
+        <li><a href="#!" class = "btn-flat"><i class="small material-icons">input</i> Signout</a></li>
+    </ul>
+
+
+    <!--Logged out page-->
+    <div class="container logged-out">
+        <!--Sign in card-->
+        <div class="row">
+            <div class = "col s12 m6">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">Something went wrong</span>
+                        <p>You're seeing this because you are logged out. Please sign back in!</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#" class="wave-effect waves-light btn yellow darken-2 modal-trigger" data-target="modal-login">Sign in</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Logged In Page-->
+    <div class="container logged-in">
+        <!--Profile card-->
+        <div class="row">
+            <div class = "col s12 m6">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">User Profile</span>
+                        <form id="profile-settings-form">
+                            <p id="display-name"></p>
+                            <div class="input-field">
+                                <input type="text" id="name-field" />
+                                <label for="name-field">Change Display Name</label>
+                            </div>
+                            <div class="input-field">
+                                <p id="email"></p>
+                                <input type="email" id="change-email" />
+                                <label for="change-email">Change Email Address</label>
+                            </div>
+                            <!--Change password by a password reset email-->
+                            <button class="btn waves-effect waves-light yellow darken-2" id="change-password">Change Password <i class="small material-icons">lock</i></button>
+                        </form>
+                    </div>
+                    <div class="card-action">
+                        <!--Might need to be changed to a button?-->
+                        <a href="#" class="wave-effect waves-light btn yellow darken-2 modal-trigger" data-target="modal-login">Save Settings <i class="small material-icons">save</i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class = "col s12 m6">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">Display Settings</span>
+                        <div class="input-field col s12">
+                            <select>
+                              <option value="sunny day"selected>Sunny Day (Light)</option>
+                              <option value="campfire">Camp Fire (Dark)</option>
+                              <option value="coldfire">Cold Fire (Dark)</option>
+                              <option value="swamp">Swamp (Dark)</option>
+                              <option value="retro">Retro (Dark)</option>
+                            </select>
+                            <label>Choose your theme</label>
+                          </div>
+                    </div>
+                    <div class="card-action">
+                        
+                        <!--Might need to be changed to a button?-->
+                        <a href="#" class="wave-effect waves-light btn yellow darken-2 modal-trigger" data-target="modal-login">Save Settings <i class="small material-icons">save</i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Delete Account Card-->
+        <div class="row">
+            <div class = "col s12 m6">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">Delete Account</span>
+                        <form id="delete-form">
+                        </form>
+                    </div>
+                    <div class="card-action">
+                        <!--Might need to be changed to a button?-->
+                        <a href="#" class="wave-effect waves-light btn yellow darken-2 modal-trigger" data-target="modal-delete">Delete Account<i class="small material-icons">delete_forever</i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Delete Account Modal-->
+        <div id = "modal-delete"class="modal">
+            <div class="modal-content">
+                <h4>Delete Account</h4>
+                <form id = "delete-modal-form">
+                    <p>Please think carefully about this decision. Deleting your account is a permanent action that cannot be undone!</p>
+                    <button class="btn  yellow darken-2">Nevermind.</button>
+                    <button class="btn red accent-4">DELETE ACCOUNT! <i class="small material-icons">delete_forever</i></button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-auth.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!--Can use index js because nothing special about settings-->
+    <script src="scripts/settings.js"></script>
+</body>
+</html>

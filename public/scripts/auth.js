@@ -23,10 +23,12 @@ auth.onAuthStateChanged(user => {
     //Logged in
     if(user){
         console.log("User logged in: ", user);
-        setupUI(user);
+        setupUIIndex(user);
+        setupUISettings(user);
     }
     else{
         console.log("User logged out: ", user);
-        setupUI(user);
+        setupUIIndex(user);
+        setupUISettings(user);
     }
 })

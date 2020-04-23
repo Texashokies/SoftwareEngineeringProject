@@ -9,7 +9,7 @@
 
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <title>Software Engineering Project</title>
+    <title>Firechat</title>
 </head>
 <body>
 
@@ -17,8 +17,19 @@
     <nav>
         <div class="nav-wrapper amber darken-2">
             <a href="#" class="brand-logo">Firechat</a>
+            <ul id ="nav-mobile" class="right hide-on-med-down">
+                <li class = "logged-i">
+                    <a href="#" class="dropdown-trigger amber lighten-1 btn" data-target="accountDropdown"><i class="material-icons">account_circle</i></a>
+                </li>
+            </ul>
         </div>
     </nav>
+
+    <!--Account dropdown-->
+    <ul id="accountDropdown" class="dropdown-content">
+        <li><a href="settings.html" class = "black-text"> <i class="small material-icons">settings</i> Settings</a></li>
+        <li><a href="#!" class = "btn-flat black-text"><i class="small material-icons">input</i> Signout</a></li>
+    </ul>
 
     <!--Logged out UI-->
 
@@ -95,7 +106,7 @@
 
     <!--Logged in UI-->
     <div class="container logged-in">
-        
+
     </div>
 
     <!-- Compiled and minified JavaScript -->
