@@ -31,6 +31,7 @@
     </ul>
 
     <!--Logged out page-->
+    <!--Should redirext to index.html when signed in-->
     <div class="container logged-out">
         <!--Sign in card-->
         <div class="row">
@@ -295,10 +296,12 @@
             <div class="input-field">
                 <input type="email" id="login-email" required />
                 <label for="login-email">Email address</label>
+                <span class="helper-text red-text" data-error="wrong" data-success="right" id="login-email-helper-text"></span>
             </div>
             <div class="input-field">
                 <input type="password" id="login-password" required />
                 <label for="login-password">Your password</label>
+                <span class="helper-text red-text" data-error="wrong" data-success="right" id="login-password-helper-text"></span>
             </div>
             <button class="btn yellow darken-2 z-depth-0" id="sign-in-button-modal">Login</button>
         </form>

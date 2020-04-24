@@ -57,10 +57,12 @@
                 <div class="input-field">
                     <input type="email" id="login-email" required />
                     <label for="login-email">Email address</label>
+                    <span class="helper-text red-text" data-error="wrong" data-success="right" id="login-email-helper-text"></span>
                 </div>
                 <div class="input-field">
                     <input type="password" id="login-password" required />
                     <label for="login-password">Your password</label>
+                    <span class="helper-text red-text" data-error="wrong" data-success="right" id="login-password-helper-text"></span>
                 </div>
                 <button class="btn yellow darken-2" id="log-in-button">Login</button>
             </form>
@@ -131,7 +133,7 @@
                         <span class="card-title">Display Settings</span>
                         <div class="input-field col s12">
                             <select id="select-theme">
-                              <option value="sunny day"selected>Sunny Day (Light)</option>
+                              <option value="sunny day">Sunny Day (Light)</option>
                               <option value="campfire">Camp Fire (Dark)</option>
                               <option value="coldfire">Cold Fire (Dark)</option>
                               <option value="swamp">Swamp (Dark)</option>
