@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firechat Issues Page</title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-wrapper amber darken-2" id="nav-wrapper">
+            <a href="index.html" class="brand-logo" id="logo">Firechat</a>
+            <ul id ="nav-mobile" class="right hid-on-med-down">
+                <li class= "logged-in">
+                    <a href="#" class="dropdown-trigger amber lighten-1 btn" data-target="accountDropdown" id="account-dropdown"><i class="material-icons">account_circle</i></a>
+                </li>
+                <li class="logged-out">
+                    <a href="#" class="dropdown-trigger amber lighten-1 btn" data-target="loginDropdown" id="login-dropdown"><i class="material-icons">account_circle</i></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!--Account dropdown-->
+    <ul id="accountDropdown" class="dropdown-content">
+        <li><a href="settings.html" class = "black-text"> <i class="small material-icons">settings</i> Settings</a></li>
+        <li><a href="#!" class = "btn-flat black-text"><i class="small material-icons">input</i> Signout</a></li>
+    </ul>
+
+    <!--Login dropdown-->
+    <ul id="loginDropdown" class="dropdown-content">
+        <li><a href="#!" class = "black-text btn-flat"> <i class="small material-icons">input</i> Login</a></li>
+        <li><a href="#!" class = "btn-flat black-text"><i class="small material-icons">input</i> Signup</a></li>
+    </ul>
+
+    <!--Doesn't matter if logged in or out-->
+    <div class="container">
+        <h4>Software Issues</h4>
+        <ul class="collapsible">
+            <li>
+              <div class="collapsible-header"><i class="material-icons">build</i>Fixed</div>
+              <div class="collapsible-body">
+                    <span><ul id="fixed-bug-list">
+
+                    </ul></span>
+                </div>
+            </li>
+            <li>
+                <div class="collapsible-header"><i class="material-icons">visibility</i>Being Looked At</div>
+                <div class="collapsible-body">
+                    <span><ul id="looked-at-list">
+
+                    </ul></span>
+                </div>
+            </li>
+            <li>
+                <div class="collapsible-header"><i class="material-icons">bug_report</i>Reported</div>
+                <div class="collapsible-body">
+                    <span><ul id="reported-list">
+
+                    </ul></span>
+                </div>
+            </li>
+          </ul>
+
+        <!--Bug report card template remove when done-->
+        <div class="row">
+            <div class = "col s11 m6">
+                <div class="card" id="test-card">
+                    <div class="card-content">
+                        <span class="card-title">Bug report: </span>
+                        <p>Description:</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#"class="waves-effect waves-light btn yellow darken-2 admin-only modal-trigger" data-target="modal-edit"> <i class="material-icons">build</i>Edit</a>
+                        <a href="#"class="waves-effect waves-light btn yellow darken-2 admin-only"> <i class="material-icons">swap_vert</i>Edit Priority</a>
+                        <a href="#" class="waves-effect waves-light btn red darken-2 admin-only"> <i class="material-icons">delete</i> Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Report bug card-->
+        <div class="row">
+            <div class = "col s11 m6">
+                <div class="card" id="test-card">
+                    <div class="card-content">
+                        <span class="card-title">Report a bug: <i class="material-icons">bug_report</i> </span>
+                        <p>Found a bug? Please tell us as much as you can.</p>
+                    </div>
+                    <div class="card-action">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Bug Report Edit Modal-->
+        <div id ="modal-edit" class="modal">
+            <div class="modal-content">
+                <h4 id="edit-bug-report">Edit Bug report: </h4>
+                <form id="edit-form">
+                    <div class="input-field">
+                        <input type="text" id="edit-bug-description" required />
+                        <label for="login-email">Description</label>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    
+
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-database.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="scripts/issues.js"></script>
+    <script src="scripts/auth.js"></script>
+</body>
+</html>
