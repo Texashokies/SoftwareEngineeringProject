@@ -73,7 +73,9 @@
                 <div class="card" id="test-card">
                     <div class="card-content">
                         <span class="card-title">Bug report: </span>
-                        <p>Description:</p>
+                        <p id="description">Description:</p>
+
+                        <p id="dev-response">Developer Response:</p>
                     </div>
                     <div class="card-action">
                         <a href="#"class="waves-effect waves-light btn yellow darken-2 admin-only modal-trigger" data-target="modal-edit"> <i class="material-icons">build</i>Edit</a>
@@ -107,8 +109,12 @@
                         <input type="text" id="edit-bug-description" required />
                         <label for="edit-bug-description">Description</label>
                     </div>
+                    <div class="input-field">
+                        <input type="text" id="edit-bug-response" required />
+                        <label for="edit-bug-description">Response</label>
+                    </div>
                     <div class="input-field col s12">
-                            <select id="select-theme">
+                            <select id="select-priority">
                               <option value="fixed">Fixed</option>
                               <option value="looked-at">Being Looked At</option>
                               <option value="reported">Reported</option>
