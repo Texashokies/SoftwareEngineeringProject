@@ -36,6 +36,12 @@ authentication.onAuthStateChanged(user => {
         catch(err){
             console.log(err);
         }
+        try {
+            setupUIIssues(user);
+        }
+        catch(err){
+            console.log(err);
+        }
     }
     else{
         console.log("User logged out: ", user);
@@ -53,6 +59,12 @@ authentication.onAuthStateChanged(user => {
         }
         try {
             setupUIChat(user);
+        }
+        catch(err){
+            console.log(err);
+        }
+        try {
+            setupUIIssues(user);
         }
         catch(err){
             console.log(err);

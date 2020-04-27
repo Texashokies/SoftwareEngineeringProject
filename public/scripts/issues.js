@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var selections = document.querySelectorAll('select');
     M.FormSelect.init(selections);
 
-    setupUIIndex();
+    setupUIIssues();
 
 });
 
@@ -31,6 +31,7 @@ const setupUIIssues = (user) => {
         loggedInComponents.forEach(item => item.style.display = "none");
         loggedOutComponents.forEach(item => item.style.display = 'block');
     }
+    setDisplayAccordingToTheme();
 }
 
 var firebaseConfig = {
@@ -55,7 +56,6 @@ function setDisplayAccordingToTheme(){
             console.log(theme);
             if(theme == "campfire"){
                 document.body.className = "grey darken-2";
-                document.getElementById("account-warning").className = "amber-text darken-3 center-align";
                 document.getElementById("nav-wrapper").className =  "nav-wrapper grey darken-4";
                 document.getElementById("logo").className = "brand-logo orange-text";
                 var cards = document.querySelectorAll(".card");
@@ -74,10 +74,13 @@ function setDisplayAccordingToTheme(){
                 for(var i=0;i<dropdowns.length;i++){
                     dropdowns[i].className= "dropdown-content black-text grey darken-1";
                 }
+                var collapsables = document.querySelectorAll(".collapsible-header");
+                for(var i =0;i<collapsables.length;i++){
+                    collapsables[i].className = "collapsible-header grey darken-2 orange-text";
+                }
             }
             else if (theme =="coldfire"){
                 document.body.className = "grey darken-2";
-                document.getElementById("account-warning").className = "blue-text darken-3 center-align";
                 document.getElementById("nav-wrapper").className =  "nav-wrapper grey darken-4";
                 document.getElementById("logo").className = "brand-logo blue-text";
                 var cards = document.querySelectorAll(".card");
@@ -96,10 +99,14 @@ function setDisplayAccordingToTheme(){
                 for(var i=0;i<dropdowns.length;i++){
                     dropdowns[i].className= "dropdown-content black-text grey darken-1";
                 }
+                var collapsables = document.querySelectorAll(".collapsible-header");
+                var collapsables = document.querySelectorAll(".collapsible-header");
+                for(var i =0;i<collapsables.length;i++){
+                    collapsables[i].className = "collapsible-header grey darken-2 blue-text";
+                }
             }
             else{
                 document.body.className = "";
-                document.getElementById("account-warning").className = "center-align";
                 document.getElementById("nav-wrapper").className =  "nav-wrapper amber darken-2";
                 document.getElementById("logo").className = "brand-logo";
                 var cards = document.querySelectorAll(".card");
@@ -118,7 +125,69 @@ function setDisplayAccordingToTheme(){
                 for(var i=0;i<dropdowns.length;i++){
                     dropdowns[i].className= "dropdown-content";
                 }
+                var collapsables = document.querySelectorAll(".collapsible-header");
+                for(var i =0;i<collapsables.length;i++){
+                    collapsables[i].className = "collapsible-header";
+                }
             }
         });
     }
 }
+
+//Listen for bug reports
+database.ref("bugreports").on("child_added", function(snapshot) {
+    var html ="";
+    html += '<li><div class="card" id="report-' + snapshot.key + '">'+
+    '<div class="card-content">'+
+        '<span class="card-title">Bug report: </span>'+
+        '<p id="description">Description:</p>'+
+        snapshot.val().description +
+        '<p id="dev-response">Developer Response:</p>'+
+        snapshot.val().response +
+    '</div>'+
+    '<div class="card-action">'+
+        '<a href="#"class="waves-effect waves-light btn yellow darken-2 admin-only modal-trigger" data-target="modal-edit"> <i class="material-icons">build</i>Edit</a>'+
+        '<a href="#" class="waves-effect waves-light btn red darken-2 admin-only modal-trigger" data-target="modal-delete"> <i class="material-icons">delete</i> Delete</a>'+
+    '</div>'+
+    '</div>' + '</li>';
+
+    document.getElementById("reported-list").innerHTML += html;
+})
+
+database.ref("report-looked").on("child_added", function(snapshot) {
+    var html ="";
+    html += '<li><div class="card" id="report-' + snapshot.key + '">'+
+    '<div class="card-content">'+
+        '<span class="card-title">Bug report: </span>'+
+        '<p id="description">Description:</p>'+
+        snapshot.val().description +
+        '<p id="dev-response">Developer Response:</p>'+
+        snapshot.val().response +
+    '</div>'+
+    '<div class="card-action">'+
+        '<a href="#"class="waves-effect waves-light btn yellow darken-2 admin-only modal-trigger" data-target="modal-edit"> <i class="material-icons">build</i>Edit</a>'+
+        '<a href="#" class="waves-effect waves-light btn red darken-2 admin-only modal-trigger" data-target="modal-delete"> <i class="material-icons">delete</i> Delete</a>'+
+    '</div>'+
+    '</div>' + '</li>';
+
+    document.getElementById("looked-at-list").innerHTML += html;
+})
+
+database.ref("report-fixed").on("child_added", function(snapshot) {
+    var html ="";
+    html += '<li><div class="card" id="report-' + snapshot.key + '">'+
+    '<div class="card-content">'+
+        '<span class="card-title">Bug report: </span>'+
+        '<p id="description">Description:</p>'+
+        snapshot.val().description +
+        '<p id="dev-response">Developer Response:</p>'+
+        snapshot.val().response +
+    '</div>'+
+    '<div class="card-action">'+
+        '<a href="#"class="waves-effect waves-light btn yellow darken-2 admin-only modal-trigger" data-target="modal-edit"> <i class="material-icons">build</i>Edit</a>'+
+        '<a href="#" class="waves-effect waves-light btn red darken-2 admin-only modal-trigger" data-target="modal-delete"> <i class="material-icons">delete</i> Delete</a>'+
+    '</div>'+
+    '</div>' + '</li>';
+
+    document.getElementById("fixed-bug-list").innerHTML += html;
+})

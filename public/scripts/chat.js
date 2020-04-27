@@ -169,3 +169,27 @@ function setDisplayAccordingToTheme(){
         }
     }
 }
+
+//Listen for messages
+
+//Insert algorithm to find correct message node consider Cantor pairing function or pull from html
+
+var nodeID;
+
+//This should work assuming same object as used in the prototypes
+database.ref("messages/" +nodeID).on("child_added" ,function(snapshot) {
+
+    var Displayname = snapshot.val().sender;
+    var message = snapshot.val().message;
+
+    var html = 
+    '<li id="message-"' + snapshot.key + '>' +
+    '<div class="card">'+
+        '<span class="black-text"><i class="material-icons">account_circle</i>'+ Displayname + '</span>'+
+        '<div class="card-content">'+
+          message+
+        '</div>'+
+    '</div>' +
+    '</li>';
+    document.getElementById("messages").innerHTML += html;
+})
