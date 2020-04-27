@@ -3,24 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <title>Firechat</title>
+    
+    <title>Firechat Contacts</title>
 </head>
 <body>
-
     <!--Nav bar-->
     <nav>
         <div class="nav-wrapper amber darken-2" id ="nav-wrapper">
-            <a href="#" class="brand-logo" id="logo">Firechat</a>
+            <a href="index.html" class="brand-logo" id="logo">Firechat</a>
             <ul id ="nav-mobile" class="right hide-on-med-down">
-                <li class = "logged-in">
-                    <a href="contacts.html" id="contacts-link"><i class="material-icons">contacts</i></a>
-                </li>
                 <li class = "logged-in">
                     <a href="#" class="dropdown-trigger amber lighten-1 btn" data-target="accountDropdown" id="account-dropdown"><i class="material-icons">account_circle</i></a>
                 </li>
@@ -111,28 +107,69 @@
         </div>
     </div>
 
-    <!--Logged in UI-->
-    <div class="container logged-n">
-        <!--Quote Card-->
+    <!--Logged in ui-->
+    <div class="container logged-in">
+        <!--Contacts list card-->
         <div class="row">
             <div class = "col s12 m20">
-                <div class="card" id="quote-card">
+                <div class="card" id ="contact-list-card">
                     <div class="card-content">
-                        <span class="card-title">Quote of the day</span>
-                        <h4 id="quote">"What makes a man turn neutral? Lust for gold? Power? Or where you just born with a heart full of neutrality?"</h4>
-                        <h6 id="quote-author">-Zapp Brannigan</h6>
+                        <span class="card-title">Contacts</span>
+                        <ul id="contacts-list">
+                            <!--Example contact card-->
+                            <div class="row">
+                                <div class = "col s12 m10">
+                                    <div class="card dynamic-card" id ="contact-card">
+                                        <div class="card-content">
+                                            <span class="card-title"> <i class="material-icons">account_circle</i> Display Name</span>
+                                            <p id="user-id">User ID</p>
+                                        </div>
+                                        <div class="card-action">
+                                            <button class="wave-effect waves-light btn yellow darken-2" id ="message-button"> <i class="material-icons">message</i> Message</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ul>
+                    </div>
+                    <div class="card-action">
+                        <a href="#" class="wave-effect waves-light btn yellow darken-2 modal-trigger" data-target="modal-add-contact" id ="add-button"> <i class="material-icons">add_circle</i> Add Contact</a>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!--Add contact modal-->
+        <div id="modal-add-contact" class="modal">
+            <div class="modal-content">
+                <h4>Add Contact</h4>
+                <ul id="user-list">
+                    <li>
+                        <div class="row">
+                            <div class = "col s12 m6">
+                                <div class="card dynamic-card" id ="contact-card">
+                                    <div class="card-content">
+                                        <span class="card-title"> <i class="material-icons">account_circle</i> Display Name</span>
+                                        <p id="user-id">User ID</p>
+                                    </div>
+                                    <div class="card-action">
+                                        <a href="#" class="wave-effect waves-light btn yellow darken-2 modal-trigger dynamic-button" data-target="modal-add" id ="message-button"> <i class="material-icons">add_circle</i>Add to contacts</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 
-    <!-- Compiled and minified JavaScript -->
+
     <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-database.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="scripts/index.js"></script>
+    <script src="scripts/contacts.js"></script>
     <script src="scripts/auth.js"></script>
 </body>
 </html>

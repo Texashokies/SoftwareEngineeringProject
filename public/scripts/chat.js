@@ -82,89 +82,90 @@ function setDisplayAccordingToTheme(){
             const theme = snapshot.val();
             console.log(snapshot.val());
             if(theme == "campfire"){
-                document.getElementById("nav-wrapper").className = "nav-wrapper grey darken-4";
-                document.getElementById("logo").className = "brand-logo orange-text";
                 document.body.className = "grey darken-2";
-                document.getElementById("account-dropdown").className = "dropdown-trigger orange darken-2 btn";
-                document.getElementById("sign-in-card").className = "card grey darken-1 amber-text darken-3";
-                document.getElementById("sign-in-button").className = "wave-effect waves-light btn orange darken-2 modal-trigger";
-                document.getElementById("sign-up-button").className = "wave-effect waves-light btn orange darken-2 modal-trigger";
-                document.getElementById("modal-signup").className = "modal grey darken-2 amber-text";
-                document.getElementById("sign-in-button-modal").className = "btn orange darken-2";
-                document.getElementById("modal-login").className = "modal grey darken-2 amber-text";
-                document.getElementById("sign-up-button-modal").className = "btn orange darken-2";
-                document.getElementById("translate-modal").className = "modal grey darken-2 amber-text";
-                document.getElementById("file-modal").className = "modal grey darken-2 amber-text";
-                document.getElementById("submitButton").className = "wave-effect waves-light btn orange darken-2 modal-trigger";
-                document.getElementById("chat-card").className = "card grey darken-1 amber-text darken-3";
-                document.getElementById("chat-title").className = "card-title amber-text darken-3";
-                document.getElementById("translate-button").className = "btn waves-effect waves-light orange darken-2 modal-trigger";
-                document.getElementById("attach-button").className = "btn waves-effect waves-light orange darken-2 modal-trigger";
-                document.getElementById("submit-button").className = "btn waves-effect waves-light orange darken-2";
+                document.getElementById("nav-wrapper").className =  "nav-wrapper grey darken-4";
+                document.getElementById("logo").className = "brand-logo orange-text";
+                var cards = document.querySelectorAll(".card");
+                for(var i =0; i< cards.length;i++){
+                    cards[i].className = "card grey darken-1 amber-text darken-3";
+                }
+                var buttons = document.querySelectorAll(".btn");
+                for(var i=0;i<buttons.length;i++){
+                    buttons[i].className  ="wave-effect waves-light btn orange darken-2 modal-trigger";
+                }
+                var modals = document.querySelectorAll(".modal");
+                for(var i=0;i<modals.length;i++){
+                    modals[i].className ="modal grey darken-2 amber-text";
+                }
+                var dropdowns = document.querySelectorAll(".dropdown-content");
+                for(var i=0;i<dropdowns.length;i++){
+                    dropdowns[i].className= "dropdown-content black-text grey darken-1";
+                }
             }
             else if(theme == "coldfire"){
-                document.getElementById("nav-wrapper").className = "nav-wrapper grey darken-4";
-                document.getElementById("logo").className = "brand-logo blue-text";
                 document.body.className = "grey darken-2";
-                document.getElementById("account-dropdown").className = "dropdown-trigger blue darken-2 btn";
-                document.getElementById("sign-in-card").className = "card grey darken-1 blue-text darken-2";
-                document.getElementById("sign-in-button").className = "wave-effect waves-light btn blue darken-2 modal-trigger";
-                document.getElementById("sign-up-button").className = "wave-effect waves-light btn blue darken-2 modal-trigger";
-                document.getElementById("modal-signup").className = "modal grey darken-2 blue-text";
-                document.getElementById("sign-in-button-modal").className = "btn blue darken-2";
-                document.getElementById("modal-login").className = "modal grey darken-2 blue-text";
-                document.getElementById("sign-up-button-modal").className = "btn orange darken-2";
-                document.getElementById("translate-modal").className = "modal grey darken-2 blue-text";
-                document.getElementById("file-modal").className = "modal grey darken-2 blue-text";
-                document.getElementById("submitButton").className = "wave-effect waves-light btn blue darken-2 modal-trigger";
-                document.getElementById("chat-card").className = "card grey darken-1 blue-text darken-3";
-                document.getElementById("chat-title").className = "card-title blue-text darken-3";
-                document.getElementById("translate-button").className = "btn waves-effect waves-light blue darken-2 modal-trigger";
-                document.getElementById("attach-button").className = "btn waves-effect waves-light blue darken-2 modal-trigger";
-                document.getElementById("submit-button").className = "btn waves-effect waves-light blue darken-2";
+                document.getElementById("nav-wrapper").className =  "nav-wrapper grey darken-4";
+                document.getElementById("logo").className = "brand-logo blue-text";
+                var cards = document.querySelectorAll(".card");
+                for(var i =0; i< cards.length;i++){
+                    cards[i].className = "card grey darken-1 blue-text darken-2";
+                }
+                var buttons = document.querySelectorAll(".btn");
+                for(var i=0;i<buttons.length;i++){
+                    buttons[i].className  ="wave-effect waves-light btn blue darken-2 modal-trigger";
+                }
+                var modals = document.querySelectorAll(".modal");
+                for(var i=0;i<modals.length;i++){
+                    modals[i].className ="modal grey darken-2 blue-text";
+                }
+                var dropdowns = document.querySelectorAll(".dropdown-content");
+                for(var i=0;i<dropdowns.length;i++){
+                    dropdowns[i].className= "dropdown-content black-text grey darken-1";
+                }
             }
             else{
-                document.getElementById("nav-wrapper").className = "nav-wrapper amber darken-2";
-                document.getElementById("logo").className = "brand-logo";
                 document.body.className = "";
-                document.getElementById("account-dropdown").className = "dropdown-trigger amber lighten-1 btn";
-                document.getElementById("sign-in-card").className = "card";
-                document.getElementById("sign-in-button").className = "wave-effect waves-light btn yellow darken-2 modal-trigger";
-                document.getElementById("sign-up-button").className = "wave-effect waves-light btn yellow darken-2 modal-trigger";
-                document.getElementById("modal-signup").className = "modal";
-                document.getElementById("sign-in-button-modal").className = "btn yellow darken-2";
-                document.getElementById("modal-login").className = "modal";
-                document.getElementById("sign-up-button-modal").className = "btn yellow darken-2";
-                document.getElementById("translate-modal").className = "modal";
-                document.getElementById("file-modal").className = "modal";
-                document.getElementById("submitButton").className = "wave-effect waves-light btn yellow darken-2 modal-trigger";
-                document.getElementById("chat-card").className = "card";
-                document.getElementById("chat-title").className = "card-title black-text darken-3";
-                document.getElementById("translate-button").className = "btn waves-effect waves-light yellow darken-2 modal-trigger";
-                document.getElementById("attach-button").className = "btn waves-effect waves-light yellow darken-2 modal-trigger";
-                document.getElementById("submit-button").className = "btn waves-effect waves-light yellow darken-2";
+                document.getElementById("account-warning").className = "center-align";
+                document.getElementById("nav-wrapper").className =  "nav-wrapper amber darken-2";
+                document.getElementById("logo").className = "brand-logo";
+                var cards = document.querySelectorAll(".card");
+                for(var i =0; i< cards.length;i++){
+                    cards[i].className = "card";
+                }
+                var buttons = document.querySelectorAll(".btn");
+                for(var i=0;i<buttons.length;i++){
+                    buttons[i].className  ="wave-effect waves-light btn yellow darken-2 modal-trigger";
+                }
+                var modals = document.querySelectorAll(".modal");
+                for(var i=0;i<modals.length;i++){
+                    modals[i].className ="modal";
+                }
+                var dropdowns = document.querySelectorAll(".dropdown-content");
+                for(var i=0;i<dropdowns.length;i++){
+                    dropdowns[i].className= "dropdown-content";
+                }
             }
         });
     }
     else{
-        document.getElementById("nav-wrapper").className = "nav-wrapper amber darken-2";
-        document.getElementById("logo").className = "brand-logo";
         document.body.className = "";
-        document.getElementById("account-dropdown").className = "dropdown-trigger amber lighten-1 btn";
-        document.getElementById("sign-in-card").className = "card";
-        document.getElementById("sign-in-button").className = "wave-effect waves-light btn yellow darken-2 modal-trigger";
-        document.getElementById("sign-up-button").className = "wave-effect waves-light btn yellow darken-2 modal-trigger";
-        document.getElementById("modal-signup").className = "modal";
-        document.getElementById("sign-in-button-modal").className = "btn yellow darken-2";
-        document.getElementById("modal-login").className = "modal";
-        document.getElementById("sign-up-button-modal").className = "btn yellow darken-2";
-        document.getElementById("translate-modal").className = "modal";
-        document.getElementById("file-modal").className = "modal";
-        document.getElementById("submitButton").className = "wave-effect waves-light btn yellow darken-2 modal-trigger";
-        document.getElementById("chat-card").className = "card";
-        document.getElementById("chat-title").className = "card-title black-text darken-3";
-        document.getElementById("translate-button").className = "btn waves-effect waves-light yellow darken-2 modal-trigger";
-        document.getElementById("attach-button").className = "btn waves-effect waves-light yellow darken-2 modal-trigger";
-        document.getElementById("submit-button").className = "btn waves-effect waves-light yellow darken-2";  
+        document.getElementById("nav-wrapper").className =  "nav-wrapper amber darken-2";
+        document.getElementById("logo").className = "brand-logo";
+        var cards = document.querySelectorAll(".card");
+        for(var i =0; i< cards.length;i++){
+            cards[i].className = "card";
+        }
+        var buttons = document.querySelectorAll(".btn");
+        for(var i=0;i<buttons.length;i++){
+            buttons[i].className  ="wave-effect waves-light btn yellow darken-2 modal-trigger";
+        }
+        var modals = document.querySelectorAll(".modal");
+        for(var i=0;i<modals.length;i++){
+            modals[i].className ="modal";
+        }
+        var dropdowns = document.querySelectorAll(".dropdown-content");
+        for(var i=0;i<dropdowns.length;i++){
+            dropdowns[i].className= "dropdown-content";
+        }
     }
 }

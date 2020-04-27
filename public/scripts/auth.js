@@ -28,6 +28,12 @@ authentication.onAuthStateChanged(user => {
             setupUIChat(user);
         }
         catch(err){
+            
+        }
+        try {
+            setupUIContacts(user);
+        }
+        catch(err){
             console.log(err);
         }
     }
