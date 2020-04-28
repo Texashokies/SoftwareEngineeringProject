@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     randomizeQuote();
     setupUIIndex();
-
 });
 
 const loggedOutComponents = document.querySelectorAll('.logged-out');
@@ -293,6 +292,11 @@ signupForm.addEventListener('submit', (e) => {
         auth.currentUser.updateProfile({
             displayName: username
         })
+
+        database.ref("users/" + auth.currentUser.uid).set({
+            "displayName": username,
+            "admin": false
+        });
 
         const modal = document.querySelector('#modal-signup');
         M.Modal.getInstance(modal).close();

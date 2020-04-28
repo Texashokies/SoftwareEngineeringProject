@@ -227,6 +227,11 @@ signupForm.addEventListener('submit', (e) => {
             displayName: username
         })
 
+        database.ref("users/" + auth.currentUser.uid).set({
+            "displayName": username,
+            "admin": false
+        });
+
         const modal = document.querySelector('#modal-signup');
         M.Modal.getInstance(modal).close();
         signupForm.reset();

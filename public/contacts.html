@@ -18,7 +18,7 @@
             <a href="index.html" class="brand-logo" id="logo">Firechat</a>
             <ul id ="nav-mobile" class="right hide-on-med-down">
                 <li class = "logged-in">
-                    <a href="#" class="dropdown-trigger amber lighten-1 btn" data-target="accountDropdown" id="account-dropdown"><i class="material-icons">account_circle</i></a>
+                    <a href="#" class="dropdown-trigger amber lighten-1 btn no-modal" data-target="accountDropdown" id="account-dropdown"><i class="material-icons">account_circle</i></a>
                 </li>
             </ul>
         </div>
@@ -27,7 +27,13 @@
     <!--Account dropdown-->
     <ul id="accountDropdown" class="dropdown-content">
         <li><a href="settings.html" class = "black-text"> <i class="small material-icons">settings</i> Settings</a></li>
-        <li><a href="#!" class = "btn-flat black-text"><i class="small material-icons">input</i> Signout</a></li>
+        <li><a href="#!" class = "btn-flat black-text no-modal" id="logout"><i class="small material-icons">input</i> Signout</a></li>
+    </ul>
+
+    <!--Login dropdown-->
+    <ul id="loginDropdown" class="dropdown-content">
+        <li><a href="#!" class = "black-text btn-flat modal-trigger" data-target="modal-login"> <i class="small material-icons">input</i> Login</a></li>
+        <li><a href="#!" class = "btn-flat black-text modal-trigger" data-target="modal-signup"><i class="small material-icons">input</i> Signup</a></li>
     </ul>
 
     <!--Logged out UI-->
@@ -82,7 +88,7 @@
                 <input type="password" id="signup-password" required />
                 <label for="signup-password">Choose password</label>
             </div>
-            <button class="btn yellow darken-2" id="sign-in-button-modal">Sign up</button>
+            <button class="btn yellow darken-2 no-modal" id="sign-in-button-modal">Sign up</button>
         </form>
         </div>
     </div>
@@ -102,7 +108,7 @@
                 <label for="login-password">Your password</label>
                 <span class="helper-text red-text" data-error="wrong" data-success="right" id="login-password-helper-text"></span>
             </div>
-            <button class="btn yellow darken-2" id="login-button">Login</button>
+            <button class="btn yellow darken-2 no-modal" id="login-button">Login</button>
         </form>
         </div>
     </div>
@@ -116,20 +122,7 @@
                     <div class="card-content">
                         <span class="card-title">Contacts</span>
                         <ul id="contacts-list">
-                            <!--Example contact card-->
-                            <div class="row">
-                                <div class = "col s12 m10">
-                                    <div class="card dynamic-card" id ="contact-card">
-                                        <div class="card-content">
-                                            <span class="card-title"> <i class="material-icons">account_circle</i> Display Name</span>
-                                            <p id="user-id">User ID</p>
-                                        </div>
-                                        <div class="card-action">
-                                            <button class="wave-effect waves-light btn yellow darken-2" id ="message-button"> <i class="material-icons">message</i> Message</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </ul>
                     </div>
                     <div class="card-action">

@@ -62,15 +62,15 @@
                     </ul>
                 </div>
                 <div class="card-action">
-                    <form onsubmit = "return sendMessage();">
-                        <input id="message" placeholder="Enter Message" autocomplete="off">
+                    <form id ="message-form">
+                        <input id="message" placeholder="Enter Message" autocomplete="off" required/>
                         <button class="btn waves-effect waves-light yellow darken-2 modal-trigger" data-target="translate-modal" id="translate-button">
                             <i class="material-icons">g_translate</i>
                         </button>
                         <button class="btn waves-effect waves-light yellow darken-2 modal-trigger" data-target="file-modal" id="attach-button">
                             <i class="material-icons">attachment</i>
                         </button>
-                        <button class="btn waves-effect waves-light yellow darken-2" type="submit" name="action" id="submit-button">Submit
+                        <button class="btn waves-effect waves-light yellow darken-2 no-modal" type="submit" name="action" id="submit-button">Submit
                             <i class="material-icons right">send</i>
                         </button>
                     </form>
@@ -284,7 +284,7 @@
             <label for="file-select">Select a file</label>
             <input type="file" id="file-select" value="upload">
             <progress value="0" max="100" id="uploader">0%</progress>
-            <button class="btn waves-effect waves-light yellow darken-2" type="submit" id="submitButton">
+            <button class="btn waves-effect waves-light yellow darken-2 no-modal" type="submit" id="submitButton">
                 Submit<i class="material-icons right">send</i>
             </button>
         </div>

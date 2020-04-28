@@ -27,6 +27,39 @@ auth.onAuthStateChanged(user => {
     }
 })
 
+var threadID;
+window.onload = function () {
+    var url = document.location.href,
+        params = url.split('?')[1].split('&'),
+        data = {}, tmp;
+        for (var i = 0, l = params.length; i < l; i++) {
+            tmp = params[i].split('=');
+            data[tmp[0]] = tmp[1];
+       }
+       this.threadID = data.thread;
+       
+
+       //Start listening for messages
+       //This should work assuming same object as used in the prototypes
+        database.ref("messages/" +this.threadID).on("child_added" ,function(snapshot) {
+
+            var Displayname = snapshot.val().sender;
+            var message = snapshot.val().message;
+
+            var html = 
+            '<li id="message-"' + snapshot.key + '>' +
+            '<div class="card">'+
+                '<span class="black-text"><i class="material-icons">account_circle</i>'+ Displayname + '</span>'+
+                '<div class="card-content">'+
+                message+
+                '</div>'+
+            '</div>' +
+            '</li>';
+            document.getElementById("messages").innerHTML += html;
+            setDisplayAccordingToTheme();
+        })
+}
+
 
 //Setup materialize components
 document.addEventListener('DOMContentLoaded', function() {
@@ -67,13 +100,6 @@ const setupUIChat = (user) => {
     setDisplayAccordingToTheme();
 }
 
-
-//Function for sending a message
-function sendMessage() {
-
-    return false;
-}
-
 function setDisplayAccordingToTheme(){
     const user = auth.currentUser;
     if(user){
@@ -91,7 +117,12 @@ function setDisplayAccordingToTheme(){
                 }
                 var buttons = document.querySelectorAll(".btn");
                 for(var i=0;i<buttons.length;i++){
-                    buttons[i].className  ="wave-effect waves-light btn orange darken-2 modal-trigger";
+                    if(!buttons[i].className.includes('no-modal')){
+                        buttons[i].className  ="wave-effect waves-light btn orange darken-2 modal-trigger";
+                    }
+                    else{
+                        buttons[i].className  ="wave-effect waves-light btn orange darken-2 no-modal";
+                    }
                 }
                 var modals = document.querySelectorAll(".modal");
                 for(var i=0;i<modals.length;i++){
@@ -112,7 +143,12 @@ function setDisplayAccordingToTheme(){
                 }
                 var buttons = document.querySelectorAll(".btn");
                 for(var i=0;i<buttons.length;i++){
-                    buttons[i].className  ="wave-effect waves-light btn blue darken-2 modal-trigger";
+                    if(!buttons[i].className.includes('no-modal')){
+                        buttons[i].className  ="wave-effect waves-light btn blue darken-2 modal-trigger";
+                    }
+                    else{
+                        buttons[i].className  ="wave-effect waves-light btn blue darken-2 no-modal";
+                    }
                 }
                 var modals = document.querySelectorAll(".modal");
                 for(var i=0;i<modals.length;i++){
@@ -134,7 +170,12 @@ function setDisplayAccordingToTheme(){
                 }
                 var buttons = document.querySelectorAll(".btn");
                 for(var i=0;i<buttons.length;i++){
-                    buttons[i].className  ="wave-effect waves-light btn yellow darken-2 modal-trigger";
+                    if(!buttons[i].className.includes('no-modal')){
+                        buttons[i].className  ="wave-effect waves-light btn yellow darken-2 modal-trigger";
+                    }
+                    else{
+                        buttons[i].className  ="wave-effect waves-light btn yellow darken-2 no-modal";
+                    }
                 }
                 var modals = document.querySelectorAll(".modal");
                 for(var i=0;i<modals.length;i++){
@@ -157,7 +198,12 @@ function setDisplayAccordingToTheme(){
         }
         var buttons = document.querySelectorAll(".btn");
         for(var i=0;i<buttons.length;i++){
-            buttons[i].className  ="wave-effect waves-light btn yellow darken-2 modal-trigger";
+            if(!buttons[i].className.includes('no-modal')){
+                buttons[i].className  ="wave-effect waves-light btn yellow darken-2 modal-trigger";
+            }
+            else{
+                buttons[i].className  ="wave-effect waves-light btn yellow darken-2 no-modal";
+            }
         }
         var modals = document.querySelectorAll(".modal");
         for(var i=0;i<modals.length;i++){
@@ -170,26 +216,29 @@ function setDisplayAccordingToTheme(){
     }
 }
 
-//Listen for messages
+document.getElementById("message-form").addEventListener('submit' ,(e) => {
+    e.preventDefault();
 
-//Insert algorithm to find correct message node consider Cantor pairing function or pull from html
+    const message = document.getElementById("message").value;
+    var displayName;
+    database.ref("users/" + auth.currentUser.uid).once('value', function(snapshot) {
+        try {
+            displayName = snapshot.val().displayName;
+        }
+        catch(e){
+            displayName = auth.currentUser.email;
+        }
+        if(!displayName){
+            displayName = auth.currentUser.email;
+        }
+    }).then( function () {
+        database.ref("messages/" + threadID).push().set({
+            "sender":displayName,
+            "message": message
+        })
+    });
+});
 
-var nodeID;
+function sendFile() {
 
-//This should work assuming same object as used in the prototypes
-database.ref("messages/" +nodeID).on("child_added" ,function(snapshot) {
-
-    var Displayname = snapshot.val().sender;
-    var message = snapshot.val().message;
-
-    var html = 
-    '<li id="message-"' + snapshot.key + '>' +
-    '<div class="card">'+
-        '<span class="black-text"><i class="material-icons">account_circle</i>'+ Displayname + '</span>'+
-        '<div class="card-content">'+
-          message+
-        '</div>'+
-    '</div>' +
-    '</li>';
-    document.getElementById("messages").innerHTML += html;
-})
+}

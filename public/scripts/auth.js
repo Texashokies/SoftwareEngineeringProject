@@ -61,6 +61,12 @@ authentication.onAuthStateChanged(user => {
             setupUIChat(user);
         }
         catch(err){
+            
+        }
+        try {
+            setupUIContacts(user);
+        }
+        catch(err){
             console.log(err);
         }
         try {
@@ -73,10 +79,16 @@ authentication.onAuthStateChanged(user => {
 })
 
 //User Logout
-const logout = document.querySelector('#logout');
-logout.addEventListener('click', (e) => {
-    e.preventDefault();
-    authentication.signOut().then(() => {
+try {
+    const logout = document.querySelector('#logout');
+    logout.addEventListener('click', (e) => {
+        e.preventDefault();
+        authentication.signOut().then(() => {
+        });
     });
-});
+}
+catch(err){
+    console.log(err);
+}
+
 
