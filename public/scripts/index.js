@@ -216,7 +216,6 @@ function setDisplayAccordingToTheme(){
     }
 }
 
-/* May not be necessary
 const loginForm = document.querySelector("#login-form");
 loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -251,4 +250,3 @@ loginForm.addEventListener('submit', (e) => {
     M.Modal.getInstance(modal).close();
     loginForm.reset();
 });
-*/
