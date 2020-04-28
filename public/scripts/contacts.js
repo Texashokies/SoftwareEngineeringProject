@@ -24,7 +24,6 @@ document.addEventListener('DOMContentLoaded', function() {
     M.Dropdown.init(dropdowns, {constrainWidth : false});
 
     setupUIContacts();
-
 });
 
 const loggedOutComponents = document.querySelectorAll('.logged-out');
@@ -35,6 +34,7 @@ const setupUIContacts = (user) => {
         //Toggle UI elements
         loggedInComponents.forEach(item => item.style.display = "block");
         loggedOutComponents.forEach(item => item.style.display = 'none');
+        startListeningForContacts();
     }
     else{
         //Toggle UI elements
@@ -118,4 +118,38 @@ function setDisplayAccordingToTheme(){
             }
         });
     }
+}
+
+async function startListeningForContacts(){
+    console.log("Starting to listen.");
+    database.ref("user contacts/" + auth.currentUser.uid).on("child_added",function (snapshot) {
+
+        var id = snapshot.val();
+        const user = {id};
+
+        const options = {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(user)
+        };
+        
+        const response = await fetch('/getuser'.options);
+        const data = await response.json();
+        var displayName = data.displayName;
+        
+
+        var html = "";
+        html += "<li id ='contact-" + snapshot.key + "'>" +
+        '<div class="card" id ="contact-card-'+snapshot.key + '">' +
+        '<div class="card-content">'+
+            '<span class="card-title"> <i class="material-icons">account_circle</i>' +  snapshot.val() +'</span>'+
+            '<p id="user-id">User ID</p>'+
+        '</div>'+
+        '<div class="card-action">'+
+            '<button class="wave-effect waves-light btn yellow darken-2" id ="message-button"> <i class="material-icons">message</i> Message</button>'+
+        '</div>'+
+    '</div>';
+    });
 }
