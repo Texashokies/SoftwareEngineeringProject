@@ -30,7 +30,7 @@ const setupUIIndex = (user) => {
 }
 
 function randomizeQuote(){
-    var num = Math.floor(Math.random() * 16);
+    var num = Math.floor(Math.random() * 17);
     const quote = document.getElementById("quote");
     const author = document.getElementById("quote-author");
     if(num==0){
@@ -102,6 +102,10 @@ function randomizeQuote(){
         quote.innerHTML = "When a bomb starts talking about itself in the third person, I get nervous.";
         author.innerHTML = "-Tom Paris";
     }
+    else if (num == 17){
+        quote.innerHTML = "I've seen things you people wouldn't believe. Attack ships on fire off the shoulder of Orion. I watched C-beams glitter in the dark near the Tannhäuser Gate. All those moments will be lost in time, like tears in rain. Time to die.";
+        author.innerHTML="-Roy Batty";
+    }
 }
 
 var firebaseConfig = {
@@ -135,7 +139,12 @@ function setDisplayAccordingToTheme(){
                 }
                 var buttons = document.querySelectorAll(".btn");
                 for(var i=0;i<buttons.length;i++){
-                    buttons[i].className  ="wave-effect waves-light btn orange darken-2 modal-trigger";
+                    if(!buttons[i].className.includes('no-modal')){
+                        buttons[i].className  ="wave-effect waves-light btn orange darken-2 modal-trigger";
+                    }
+                    else{
+                        buttons[i].className  ="wave-effect waves-light btn orange darken-2 no-modal";
+                    }
                 }
                 var modals = document.querySelectorAll(".modal");
                 for(var i=0;i<modals.length;i++){
@@ -157,7 +166,12 @@ function setDisplayAccordingToTheme(){
                 }
                 var buttons = document.querySelectorAll(".btn");
                 for(var i=0;i<buttons.length;i++){
-                    buttons[i].className  ="wave-effect waves-light btn blue darken-2 modal-trigger";
+                    if(!buttons[i].className.includes('no-modal')){
+                        buttons[i].className  ="wave-effect waves-light btn blue darken-2 modal-trigger";
+                    }
+                    else{
+                        buttons[i].className  ="wave-effect waves-light btn blue darken-2 no-modal";
+                    }
                 }
                 var modals = document.querySelectorAll(".modal");
                 for(var i=0;i<modals.length;i++){
@@ -179,7 +193,12 @@ function setDisplayAccordingToTheme(){
                 }
                 var buttons = document.querySelectorAll(".btn");
                 for(var i=0;i<buttons.length;i++){
-                    buttons[i].className  ="wave-effect waves-light btn yellow darken-2 modal-trigger";
+                    if(!buttons[i].className.includes('no-modal')){
+                        buttons[i].className  ="wave-effect waves-light btn yellow darken-2 modal-trigger";
+                    }
+                    else{
+                        buttons[i].className  ="wave-effect waves-light btn yellow darken-2 no-modal";
+                    }
                 }
                 var modals = document.querySelectorAll(".modal");
                 for(var i=0;i<modals.length;i++){
@@ -203,7 +222,12 @@ function setDisplayAccordingToTheme(){
         }
         var buttons = document.querySelectorAll(".btn");
         for(var i=0;i<buttons.length;i++){
-            buttons[i].className  ="wave-effect waves-light btn yellow darken-2 modal-trigger";
+            if(!buttons[i].className.includes('no-modal')){
+                buttons[i].className  ="wave-effect waves-light btn yellow darken-2 modal-trigger";
+            }
+            else{
+                buttons[i].className  ="wave-effect waves-light btn yellow darken-2 no-modal";
+            }
         }
         var modals = document.querySelectorAll(".modal");
         for(var i=0;i<modals.length;i++){
@@ -216,6 +240,8 @@ function setDisplayAccordingToTheme(){
     }
 }
 
+//Login
+//Not in auth because modals get fussy
 const loginForm = document.querySelector("#login-form");
 loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -249,4 +275,50 @@ loginForm.addEventListener('submit', (e) => {
     const modal = document.querySelector("#modal-login");
     M.Modal.getInstance(modal).close();
     loginForm.reset();
+});
+
+//Signup
+//Not in auth because modals get fussy
+const signupForm = document.querySelector('#signup-form');
+signupForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const email = signupForm['signup-email'].value;
+    const password = signupForm['signup-password'].value
+
+    firebase.auth().createUserWithEmailAndPassword(email, password).then( function(cred){
+        console.log(cred.user);
+
+        const username = signupForm['username'].value;
+        auth.currentUser.updateProfile({
+            displayName: username
+        })
+
+        const modal = document.querySelector('#modal-signup');
+        M.Modal.getInstance(modal).close();
+        signupForm.reset();
+        //Deal with any errors
+    }).catch (function(e){
+        console.log("Error: " + e);
+        if(e.code === 'auth/invalid-email'){
+            console.log("Invalid email");
+            document.getElementById("signup-email-helper-text").innerHTML = "Invalid Email";
+            document.getElementById("signup-password-helper-text").innerHTML = "";
+        }
+        else if(e.code === 'auth/user-disabled'){
+            document.getElementById("signup-email-helper-text").innerHTML = "User Disabled";
+            document.getElementById("signup-password-helper-text").innerHTML = "";
+        }
+        else if(e.code === 'auth/user-not-found'){
+            document.getElementById("signup-email-helper-text").innerHTML = "User not found";
+            document.getElementById("signup-password-helper-text").innerHTML = "";
+        }
+        else if(e.code === 'auth/wrong-password'){
+            document.getElementById("signup-email-helper-text").innerHTML = "";
+            document.getElementById("signup-password-helper-text").innerHTML = "Wrong Password";
+        }
+        else{
+            alert(e.code)
+        }
+    });
 });

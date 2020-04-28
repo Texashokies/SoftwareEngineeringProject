@@ -5,7 +5,7 @@ const CloudmersiveVirusApiClient = require('cloudmersive-virus-api-client');
 const formidable = require('formidable');
 const fs = require('fs');
 var admin = require('firebase-admin');
-var serviceAccount = require("path/to/serviceAccountKey.json");
+var serviceAccount = require("software-engineering-pro-3ba1c-firebase-adminsdk-diyjf-63f0a4d8d0.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),

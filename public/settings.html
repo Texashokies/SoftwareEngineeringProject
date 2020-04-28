@@ -18,7 +18,16 @@
             <a href="index.html" class="brand-logo" id="logo">Firechat</a>
             <ul id ="nav-mobile" class="right hide-on-med-down">
                 <li class = "logged-in">
+                    <a href="contacts.html" id="contacts-link"><i class="material-icons">contacts</i></a>
+                </li>
+                <li>
+                    <a href="issues.html"> <i class="material-icons tiny">bug_report</i></a>
+                </li>
+                <li class = "logged-in">
                     <a href="#" class="dropdown-trigger amber lighten-1 btn" data-target="accountDropdown" id="account-dropdown"><i class="material-icons">account_circle</i></a>
+                </li>
+                <li class="logged-out">
+                    <a href="#" class="dropdown-trigger amber lighten-1 btn" data-target="loginDropdown" id="login-dropdown"><i class="material-icons">account_circle</i></a>
                 </li>
             </ul>
         </div>
@@ -26,8 +35,14 @@
 
     <!--Account dropdown-->
     <ul id="accountDropdown" class="dropdown-content">
-        <li><a href="settings.html"> <i class="small material-icons">settings</i> Settings</a></li>
-        <li><a href="#!" class = "btn-flat"><i class="small material-icons">input</i> Signout</a></li>
+        <li><a href="settings.html" class = "black-text"> <i class="small material-icons">settings</i> Settings</a></li>
+        <li><a href="#!" class = "btn-flat black-text" id="logout"><i class="small material-icons">input</i> Signout</a></li>
+    </ul>
+
+    <!--Login dropdown-->
+    <ul id="loginDropdown" class="dropdown-content">
+        <li><a href="#!" class = "black-text btn-flat modal-trigger" data-target="modal-login"> <i class="small material-icons">input</i> Login</a></li>
+        <li><a href="#!" class = "btn-flat black-text modal-trigger" data-target="modal-signup"><i class="small material-icons">input</i> Signup</a></li>
     </ul>
 
 
@@ -93,7 +108,7 @@
     </div>
 
     <!-- Logged In Page-->
-    <div class="container logged-i">
+    <div class="container logged-in">
         <!--Profile card-->
         <div class="row">
             <div class = "col s12 m6">

@@ -72,3 +72,11 @@ authentication.onAuthStateChanged(user => {
     }
 })
 
+//User Logout
+const logout = document.querySelector('#logout');
+logout.addEventListener('click', (e) => {
+    e.preventDefault();
+    authentication.signOut().then(() => {
+    });
+});
+
