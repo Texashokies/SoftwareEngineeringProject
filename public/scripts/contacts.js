@@ -33,6 +33,7 @@ const setupUIContacts = (user) => {
         loggedInComponents.forEach(item => item.style.display = "block");
         loggedOutComponents.forEach(item => item.style.display = 'none');
         startListeningForContacts();
+        startListeningForAllUsers();
     }
     else{
         //Toggle UI elements
@@ -61,9 +62,15 @@ function setDisplayAccordingToTheme(){
                 for(var i=0;i<buttons.length;i++){
                     if(!buttons[i].className.includes('no-modal')){
                         buttons[i].className  ="wave-effect waves-light btn orange darken-2 modal-trigger";
+                        if(buttons[i].className.includes("delete-button")){
+                            buttons[i].className  ="wave-effect waves-light btn red darken-4 modal-trigger delete-button";
+                        }
                     }
                     else{
                         buttons[i].className  ="wave-effect waves-light btn orange darken-2 no-modal";
+                        if(buttons[i].className.includes("delete-button")){
+                            buttons[i].className  ="wave-effect waves-light btn red darken-4 no-modal delete-button";
+                        }
                     }
                 }
                 var modals = document.querySelectorAll(".modal");
@@ -88,9 +95,15 @@ function setDisplayAccordingToTheme(){
                 for(var i=0;i<buttons.length;i++){
                     if(!buttons[i].className.includes('no-modal')){
                         buttons[i].className  ="wave-effect waves-light btn blue darken-2 modal-trigger";
+                        if(buttons[i].className.includes("delete-button")){
+                            buttons[i].className  ="wave-effect waves-light btn red darken-4 modal-trigger delete-button";
+                        }
                     }
                     else{
                         buttons[i].className  ="wave-effect waves-light btn blue darken-2 no-modal";
+                        if(buttons[i].className.includes("delete-button")){
+                            buttons[i].className  ="wave-effect waves-light btn red darken-4 no-modal delete-button";
+                        }
                     }
                 }
                 var modals = document.querySelectorAll(".modal");
@@ -161,13 +174,12 @@ function setDisplayAccordingToTheme(){
 }
 
 function startListeningForContacts(){
-    console.log("Starting to listen.");
-    database.ref("user contacts/" + auth.currentUser.uid).on("child_added", async function (snapshot) {
+    database.ref("user contacts/" + auth.currentUser.uid).on("child_added", function (snapshot) {
 
         var id = snapshot.val();
         var contactID = snapshot.key;
         console.log(id);
-        database.ref("users/" + id).on('value' ,function(snapshot){
+        database.ref("users/" + id).once('value' ,function(snapshot){
             displayName = snapshot.val().displayName;
             var html = "";
             html += "<li id ='contact-" + contactID + "'>" +
@@ -178,10 +190,34 @@ function startListeningForContacts(){
             '</div>'+
             '<div class="card-action">'+
                 '<button class="wave-effect waves-light btn yellow darken-2 no-modal" id ="message-button-' + contactID+ '" onClick="startMessageThread(this.id)"> <i class="material-icons">message</i> Message</button>'+
+                '<button class="wave-effect waves-light btn yellow darken-2 no-modal delete-button" id ="delete-button-' + contactID+ '" onClick="removeContact(this.id)"> <i class="material-icons">remove_circle</i> Remove</button>'+
             '</div></div>';
             document.getElementById("contacts-list").innerHTML += html;
             setDisplayAccordingToTheme();
         });
+    });
+
+    database.ref("user contacts/" + auth.currentUser.uid).on("child_removed", function (snapshot) {
+        console.log("Child removed: " + snapshot.key);
+        document.getElementById("contact-" + snapshot.key).innerHTML = "";
+        
+    });
+}
+
+function startListeningForAllUsers(){
+    database.ref("users/").on("child_added", function(snapshot) {
+        var html = "";
+        html += '<li id="potential-contact-' + snapshot.key +'">' +
+        '<div class="card" id="potential-contact-' + snapshot.key +'">' +
+            '<div class="card-content">' +
+                '<span class="card-title"> <i class="material-icons">account_circle</i>' + snapshot.val().displayName + '</span>' +
+                '<p id="user-id">'+ snapshot.key +'</p>' +
+        '</div>' +
+        '<div class="card-action">' +
+            '<button class="wave-effect waves-light btn yellow darken-2 no-modal" id ="add-contact-button-' + snapshot.key + '" onClick="addContact(this.id)"> <i class="material-icons">add_circle</i>Add to contacts</button>'
+        '</div>' +
+        '</div>';
+        document.getElementById("user-list").innerHTML += html;
     });
 }
 
@@ -274,6 +310,7 @@ signupForm.addEventListener('submit', (e) => {
 });
 
 function startMessageThread(htmlid){
+    console.log("HTMLID: " + htmlid);
     var otherUserID = htmlid.substring(16);
     console.log(otherUserID);
     var myID = auth.currentUser.uid;
@@ -336,3 +373,21 @@ function getIDValue(id){
     return num;
 }
   
+function addContact(htmlid){
+    var otherUserID = htmlid.substring(19);
+    console.log(otherUserID);
+    database.ref("user contacts/" + auth.currentUser.uid).push().set(otherUserID);
+}
+
+function removeContact(htmlid){
+    console.log("HTMLID: " + htmlid);
+    var contact = htmlid.substring(14);
+
+    console.log(contact);
+
+    var path = "user contacts/" + auth.currentUser.uid + "/" + contact;
+    console.log(path);
+    var ref = database.ref(path)
+    ref.remove();
+
+}
