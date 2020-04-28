@@ -72,7 +72,6 @@ authentication.onAuthStateChanged(user => {
     }
 })
 
-
 //User Sign Up
 const signupForm = document.querySelector('#signup-form');
 signupForm.addEventListener('submit', (e) => {
