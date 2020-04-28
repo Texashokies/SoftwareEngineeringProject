@@ -133,6 +133,23 @@ function setDisplayAccordingToTheme(){
         });
     }
 }
+/* Sample code
+database.ref(path in database).push("Creates a new node").set( //Sets the value of the new node
+    {
+        //The object to set
+    }
+)
+
+
+var description = "Hello I'm a description!";
+var response = "I hate you!";
+
+database.ref("bugreports").push().set({
+    description: description,
+    response: response
+});
+*/
+
 
 //Listen for bug reports
 database.ref("bugreports").on("child_added", function(snapshot) {

@@ -284,7 +284,7 @@
             <label for="file-select">Select a file</label>
             <input type="file" id="file-select" value="upload">
             <progress value="0" max="100" id="uploader">0%</progress>
-            <button class="btn waves-effect waves-light yellow darken-2 no-modal" type="submit" id="submitButton">
+            <button class="btn waves-effect waves-light yellow darken-2 no-modal" onclick="sendFile()" id="submitButton">
                 Submit<i class="material-icons right">send</i>
             </button>
         </div>
@@ -334,6 +334,7 @@
     <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-storage.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="scripts/chat.js"></script>
     <script src="scripts/auth.js"></script>

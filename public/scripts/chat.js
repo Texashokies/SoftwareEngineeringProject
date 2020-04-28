@@ -12,6 +12,7 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const database = firebase.database();
+const storage = firebase.storage();
 
 //Listen for auth status changes log ins and outs
 auth.onAuthStateChanged(user => {
@@ -44,19 +45,23 @@ window.onload = function () {
         database.ref("messages/" +this.threadID).on("child_added" ,function(snapshot) {
 
             var Displayname = snapshot.val().sender;
-            var message = snapshot.val().message;
+            if(!(Displayname === "ignore")){
+                var message = snapshot.val().message;
 
-            var html = 
-            '<li id="message-"' + snapshot.key + '>' +
-            '<div class="card">'+
-                '<span class="black-text"><i class="material-icons">account_circle</i>'+ Displayname + '</span>'+
-                '<div class="card-content">'+
-                message+
-                '</div>'+
-            '</div>' +
-            '</li>';
-            document.getElementById("messages").innerHTML += html;
-            setDisplayAccordingToTheme();
+                var html = 
+                '<li id="message-"' + snapshot.key + '>' +
+                '<div class="card">'+
+                    '<span class="black-text"><i class="material-icons">account_circle</i>'+ Displayname + '</span>'+
+                    '<div class="card-content">'+
+                    message+
+                    '</div>'+
+                '</div>' +
+                '</li>';
+                document.getElementById("messages").innerHTML += html;
+                setDisplayAccordingToTheme();
+            }
+            else{
+            }
         })
 }
 
@@ -216,6 +221,7 @@ function setDisplayAccordingToTheme(){
     }
 }
 
+//Send message
 document.getElementById("message-form").addEventListener('submit' ,(e) => {
     e.preventDefault();
 
@@ -232,13 +238,48 @@ document.getElementById("message-form").addEventListener('submit' ,(e) => {
             displayName = auth.currentUser.email;
         }
     }).then( function () {
-        database.ref("messages/" + threadID).push().set({
-            "sender":displayName,
-            "message": message
-        })
+
+        //check if message needs to be translated
+        var fromLang = document.getElementById("translate-from").value;
+        var toLang = document.getElementById("translate-to").value;
+        
+        if(!(fromLang === toLang)){
+            console.log("Chat from:" +fromLang);
+            console.log(toLang);
+            sendTranslatedMessage(message,displayName);
+        }
+        else{
+            database.ref("messages/" + threadID).push().set({
+                "sender":displayName,
+                "message": message
+            })
+            document.getElementById("message-form").reset();
+        }        
     });
 });
 
-function sendFile() {
+async function sendTranslatedMessage(message,displayName){
+    var fromLang = document.getElementById("translate-from").value;
+    var toLang = document.getElementById("translate-to").value;
+    console.log("Send from lang: " +fromLang)
+    console.log("Send to lang: " +toLang)
+    console.log("Send message: " +message)
+    console.log("Send displayName: " +displayName)
+    const messageToTranslate = {message,fromLang,toLang};
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(messageToTranslate)
+    };
+    const response = await fetch('/apitranslation', options);
+    const data = await response.json();
+    message = data.translatedMessage;
 
+    database.ref("messages/" + threadID).push().set({
+        "sender":displayName,
+        "message": message
+    })
+    document.getElementById("message-form").reset();
 }

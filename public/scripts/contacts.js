@@ -328,13 +328,15 @@ function startMessageThread(htmlid){
 
     var pairOneExist = false;
     var pairTwoExist = false;
-    var threadID;
+    var threadID = "test";
 
     database.ref("messages/" + pairValue1).once('value', function(snapshot){
         if(snapshot.val() != null){
             console.log("Pair value 1 exists")
             pairOneExist = true;
+            console.log(threadID);
             threadID = snapshot.key;
+            console.log(threadID);
         }
     }).then(
         function() {
@@ -342,14 +344,25 @@ function startMessageThread(htmlid){
                 if(snapshot.val() != null){
                     console.log("Pair value 2 exists")
                     pairTwoExist =true;
+                    console.log(threadID);
                     threadID = snapshot.key;
+                    console.log(threadID);
                 }
                 else{
                     console.log("Pair value 2 does not exists")
+                    console.log(threadID);
+                    if(!pairOneExist){
+                        database.ref("messages/" + pairValue1).push().set({
+                            sender: "ignore",
+                            message: "Report a bug if you see me!"
+                        })
+                    }
                 }
             }).then(
                 function() {
-                    var url = "/public/chat.html?thread=" + threadID;
+                    console.log(threadID);
+                    var url = "/chat.html?thread=" + threadID;
+                    //console.log(url);
                     document.location.href = url;
                 }
             );
