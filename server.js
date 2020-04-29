@@ -6,7 +6,7 @@ const formidable = require('formidable');
 const fs = require('fs');
 const requestModule = require('request');
 const admin = require('firebase-admin');
-
+const CloudmersiveImageApiClient = require('cloudmersive-image-api-client');
 admin.initializeApp({
   credential: admin.credential.applicationDefault(),
   databaseURL: "https://software-engineering-pro-3ba1c.firebaseio.com"
@@ -100,21 +100,64 @@ app.post('/sendfile', (request, endresponse) => {
                 var result = data.CleanResult;
                 var viruses = data.foundViruses;
 
-                var message = displayName + " is sharing the file " + filename + " It recieved a Cloudmersive Virus Result of: ";
-                if(result){
-                  message += "Clean";
+                var filetype = filename.split('.').pop();
+                var imageTypes = ["jpg","png","gif"];
+                var isImage = false;
+                for(var i = 0; i<imageTypes.length;i++){
+                  if(filetype === imageTypes[i]){
+                    isImage = true;
+                    break;
+                  }
+                }
+                if(isImage){
+                    var defaultClient = CloudmersiveImageApiClient.ApiClient.instance;
+                    // Configure API key authorization: Apikey
+                    var Apikey = defaultClient.authentications['Apikey'];
+                    Apikey.apiKey = '1a12d69f-fced-43c9-8a39-6c0fd33c901f';
+                    var apiInstance = new CloudmersiveImageApiClient.NsfwApi();
+
+                    var imageCallback = function(error, data, response) {
+                      if (error) {
+                        console.error(error);
+                      } else {
+                        console.log('Image API called successfully. Returned data: ' + data);
+                        database.ref("messages/" + threadID).push().set({
+                            "sender": displayName,
+                            "wasClassified": data.Successful,
+                            "score": data.Score,
+                            "imageLink" : url
+                        });
+                        fs.unlink(filename, (err) =>{
+                          console.error(err)
+                          return
+                        });
+                      }
+                    };
+                    apiInstance.nsfwClassify(inputFile, imageCallback);
                 }
                 else{
-                  message += "Unclean. Found viruses: " + viruses;
+                  //This is for non-image files
+                  var message = displayName + " is sharing the file " + filename + " It recieved a Cloudmersive Virus Result of: ";
+                  if(result){
+                    message += "Clean";
+                  }
+                  else{
+                    message += "Unclean. Found viruses: " + viruses;
+                  }
+                  message += "Note: Your browser may not prompt for download but instead open the file within the browser.";
+                  console.log(threadID);
+                  console.log(url);
+                  database.ref("messages/" + threadID).push().set({
+                    "sender": displayName,
+                    "message": message,
+                    "url": url
+                  });
+                  fs.unlink(filename, (err) =>{
+                    console.error(err)
+                    return
+                  });
                 }
-                message += "Note: Your browser may not prompt for download but instead open the file within the browser.";
-                console.log(threadID);
-                console.log(url);
-                database.ref("messages/" + threadID).push().set({
-                  "sender": displayName,
-                  "message": message,
-                  "url": url
-                });
+                
             }
         };
 

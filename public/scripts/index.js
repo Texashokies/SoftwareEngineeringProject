@@ -107,23 +107,23 @@ function randomizeQuote(){
     }
     else if (num == 18){
         quote.innerHTML = "Hi diddly ho neighborinos!";
-        auth.innerHTML="-Ned Flanders";
+        author.innerHTML="-Ned Flanders";
     }
     else if(num == 19){
         quote.innerHTML = "Bless the grocer for this wonderful meat, the middleman who jacked up the price, and let's not forget the humane but determined boys at the slaughterhouse.";
-        auth.innerHTML="-Ned Flanders";
+        author.innerHTML="-Ned Flanders";
     }
     else if(num == 20){
         quote.innerHTML = "You're never bored painting the Lord!";
-        auth.innerHTML="-Ned Flanders";
+        author.innerHTML="-Ned Flanders";
     }
     else if(num == 20){
         quote.innerHTML = "Now what can I ding dong diddly do for you?";
-        auth.innerHTML="-Ned Flanders";
+        author.innerHTML="-Ned Flanders";
     }
     else if(num == 21){
         quote.innerHTML = "Watch Fox and be damned for all eternity.";
-        auth.innerHTML="-Ned Flanders";
+        author.innerHTML="-Ned Flanders";
     }
 }
 

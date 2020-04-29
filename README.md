@@ -15,6 +15,8 @@ npm install formidable --save
 
 npm install cloudmersive-virus-api-client --save
 
+npm install cloudmersive-image-api-client --save
+
 Setup Firebase admin sdk: https://firebase.google.com/docs/database/admin/start#admin-sdk-setup
 
 To test that everything is setup run the command "node server"

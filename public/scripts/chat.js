@@ -65,6 +65,26 @@ window.onload = function () {
                     document.getElementById("messages").innerHTML += html;
                     setDisplayAccordingToTheme();
                 }
+                else if(snapshot.val().wasClassified){
+                    console.log("Recieved image");
+                    var image = snapshot.val().imageLink;
+                    var score = snapshot.val().score;
+                    var html = '<li id="message-' + snapshot.key + '>' +
+                    '<div class="card">'+
+                    '<span class="black-text"><i class="material-icons">account_circle</i>'+ Displayname + '</span>'+
+                    '<div class="card-content">';
+
+                    if(score > .2){
+                        html += '<img src="' + image + '" id="image-' + snapshot.key+ '" style="filter: blur(20px);" onClick="toggleBlur(this.id);">';
+                    }else{
+                        html += '<img src="' + image + '" id="image-' + snapshot.key+ '">';
+                    }
+                    html+='</div>'+
+                    '</div>' +
+                    '</li>';
+                    document.getElementById("messages").innerHTML += html;
+                    setDisplayAccordingToTheme();
+                }
                 else{
                     var message = snapshot.val().message;
                     emoteMessage(message);
@@ -346,6 +366,7 @@ function sendFile(){
         var uploader = document.getElementById("uploader");
         var fileButton = document.getElementById("file-select");
         var submitButton = document.getElementById("submitButton");
+        submitButton.className += " disabled";
         //Listen for file selection
         //Get the file
         var file = fileButton.files[0];
@@ -389,4 +410,14 @@ async function sendFileAsync(options){
     const data = await response.json();
     
     console.log("Data: " + data.isclean);
+}
+
+function toggleBlur(htmlid){
+    var image =document.getElementById(htmlid)
+    if(image.style.cssText === "filter: blur(20px);"){
+        image.style = "";
+    }
+    else{
+        image.style = "filter: blur(20px);"
+    }
 }
