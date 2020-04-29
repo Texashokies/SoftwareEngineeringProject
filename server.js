@@ -5,6 +5,13 @@ const CloudmersiveVirusApiClient = require('cloudmersive-virus-api-client');
 const formidable = require('formidable');
 const fs = require('fs');
 const requestModule = require('request');
+const admin = require('firebase-admin');
+
+admin.initializeApp({
+  credential: admin.credential.applicationDefault(),
+  databaseURL: "https://software-engineering-pro-3ba1c.firebaseio.com"
+});
+var database = admin.database();
 var app = express();
 app.use(express.static(__dirname + '/public'));
 var port = 8000;
@@ -68,18 +75,19 @@ app.post('/sendfile', (request, endresponse) => {
     console.log(request.body);
     var data = request.body;
     var displayName = data.displayname;
-    var threadID = data.messagethead;
-
+    var threadID = data.messagethread;
+    var filename = data.filename;
+    var url = data.url;
     var defaultClient = CloudmersiveVirusApiClient.ApiClient.instance;
     var Apikey = defaultClient.authentications['Apikey'];
     Apikey.apiKey = "5ef61ec5-f707-4964-ad4a-7d52e0fc6e3f";
     
     var api = new CloudmersiveVirusApiClient.ScanApi();
 
-    var fileStream = fs.createWriteStream(data.filename);
+    var fileStream = fs.createWriteStream(filename);
     fileStream.on('close', function(){
         console.log("file done");
-        var inputFile = Buffer.from(fs.readFileSync(data.filename).buffer);
+        var inputFile = Buffer.from(fs.readFileSync(filename).buffer);
         
         var callback = function(error, data, response) {
             if (error) {
@@ -91,24 +99,27 @@ app.post('/sendfile', (request, endresponse) => {
                 console.log(data.FoundViruses);
                 var result = data.CleanResult;
                 var viruses = data.foundViruses;
-                
-                var firebaseConfig = {
-                    apiKey: "AIzaSyC6QR79tnkpGKfvhc1d_VM2Pdp8lmwVTSw",
-                    authDomain: "software-engineering-pro-3ba1c.firebaseapp.com",
-                    databaseURL: "https://software-engineering-pro-3ba1c.firebaseio.com",
-                    projectId: "software-engineering-pro-3ba1c",
-                    storageBucket: "software-engineering-pro-3ba1c.appspot.com",
-                    messagingSenderId: "482967068895",
-                    appId: "1:482967068895:web:559182a15c3ba3c1e5c96a"
-                  };
-                  // Initialize Firebase
-                firebase.initializeApp(firebaseConfig);
-                const auth = firebase.auth();
-                const database = firebase.database();
+
+                var message = displayName + " is sharing the file " + filename + " It recieved a Cloudmersive Virus Result of: ";
+                if(result){
+                  message += "Clean";
+                }
+                else{
+                  message += "Unclean. Found viruses: " + viruses;
+                }
+                message += "Note: Your browser may not prompt for download but instead open the file within the browser.";
+                console.log(threadID);
+                console.log(url);
+                database.ref("messages/" + threadID).push().set({
+                  "sender": displayName,
+                  "message": message,
+                  "url": url
+                });
             }
         };
 
         api.scanFile(inputFile,callback);
+        //Go to call back function
 
     });
     requestModule(data.url).pipe(fileStream);

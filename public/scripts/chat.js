@@ -15,6 +15,7 @@ const database = firebase.database();
 const storage = firebase.storage();
 
 //Listen for auth status changes log ins and outs
+//Might want to consider kicking user back to home page if not logged in.
 auth.onAuthStateChanged(user => {
     console.log(user);
     //Logged in
@@ -46,19 +47,39 @@ window.onload = function () {
 
             var Displayname = snapshot.val().sender;
             if(!(Displayname === "ignore")){
-                var message = snapshot.val().message;
-                emoteMessage(message);
-                var html = 
-                '<li id="message-"' + snapshot.key + '>' +
-                '<div class="card">'+
-                    '<span class="black-text"><i class="material-icons">account_circle</i>'+ Displayname + '</span>'+
-                    '<div class="card-content">'+
-                    message+
-                    '</div>'+
-                '</div>' +
-                '</li>';
-                document.getElementById("messages").innerHTML += html;
-                setDisplayAccordingToTheme();
+                if(snapshot.val().url){
+                    console.log("Recieving file message");
+                    var message = snapshot.val().message;
+                    var html = 
+                    '<li id="message-"' + snapshot.key + '>' +
+                    '<div class="card">'+
+                        '<span class="black-text"><i class="material-icons">account_circle</i>'+ Displayname + '</span>'+
+                        '<div class="card-content">'+
+                        message+
+                        '</div>'+
+                        '<div class="card-action">'+
+                            '<a href="'+ snapshot.val().url + '" download class="btn no-modal"> <i class="material-icons">cloud_download</i>Download Here</a>' +
+                        '</div>'+
+                    '</div>' +
+                    '</li>';
+                    document.getElementById("messages").innerHTML += html;
+                    setDisplayAccordingToTheme();
+                }
+                else{
+                    var message = snapshot.val().message;
+                    emoteMessage(message);
+                    var html = 
+                    '<li id="message-"' + snapshot.key + '>' +
+                    '<div class="card">'+
+                        '<span class="black-text"><i class="material-icons">account_circle</i>'+ Displayname + '</span>'+
+                        '<div class="card-content">'+
+                        message+
+                        '</div>'+
+                    '</div>' +
+                    '</li>';
+                    document.getElementById("messages").innerHTML += html;
+                    setDisplayAccordingToTheme();
+                }   
             }
             else{
             }
