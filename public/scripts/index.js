@@ -29,7 +29,7 @@ const setupUIIndex = (user) => {
 }
 
 function randomizeQuote(){
-    var num = Math.floor(Math.random() * 17);
+    var num = Math.floor(Math.random() * 21);
     const quote = document.getElementById("quote");
     const author = document.getElementById("quote-author");
     if(num==0){
@@ -104,6 +104,26 @@ function randomizeQuote(){
     else if (num == 17){
         quote.innerHTML = "I've seen things you people wouldn't believe. Attack ships on fire off the shoulder of Orion. I watched C-beams glitter in the dark near the Tannhäuser Gate. All those moments will be lost in time, like tears in rain. Time to die.";
         author.innerHTML="-Roy Batty";
+    }
+    else if (num == 18){
+        quote.innerHTML = "Hi diddly ho neighborinos!";
+        auth.innerHTML="-Ned Flanders";
+    }
+    else if(num == 19){
+        quote.innerHTML = "Bless the grocer for this wonderful meat, the middleman who jacked up the price, and let's not forget the humane but determined boys at the slaughterhouse.";
+        auth.innerHTML="-Ned Flanders";
+    }
+    else if(num == 20){
+        quote.innerHTML = "You're never bored painting the Lord!";
+        auth.innerHTML="-Ned Flanders";
+    }
+    else if(num == 20){
+        quote.innerHTML = "Now what can I ding dong diddly do for you?";
+        auth.innerHTML="-Ned Flanders";
+    }
+    else if(num == 21){
+        quote.innerHTML = "Watch Fox and be damned for all eternity.";
+        auth.innerHTML="-Ned Flanders";
     }
 }
 

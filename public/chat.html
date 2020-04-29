@@ -282,7 +282,9 @@
         <div class="modal-content">
             <h4>Send file</h4>
             <label for="file-select">Select a file</label>
-            <input type="file" id="file-select" value="upload">
+            <form id="file-form">
+                <input type="file" id="file-select" value="upload">
+            </form>
             <progress value="0" max="100" id="uploader">0%</progress>
             <button class="btn waves-effect waves-light yellow darken-2 no-modal" onclick="sendFile()" id="submitButton">
                 Submit<i class="material-icons right">send</i>

@@ -47,7 +47,7 @@ window.onload = function () {
             var Displayname = snapshot.val().sender;
             if(!(Displayname === "ignore")){
                 var message = snapshot.val().message;
-
+                emoteMessage(message);
                 var html = 
                 '<li id="message-"' + snapshot.key + '>' +
                 '<div class="card">'+
@@ -65,6 +65,31 @@ window.onload = function () {
         })
 }
 
+
+function emoteMessage(message){
+    const regexp = RegExp(':[^:\\s]*(?:::[^:\\s]*)*:','g');
+    const matches = message.matchAll(regexp);
+
+    var newstring = message.replace(regexp,replaceWithEmote);
+    console.log(newstring);
+    /*
+    for(const match of matches) {
+        //compare match against list of emotes and then replace.
+        console.log(`Found ${match[0]} start=${match.index} end=${match.index + match[0].length}.`);
+    }*/
+}
+
+function replaceWithEmote(match){
+    var emote = match.substring(1,match.length-1);
+    
+    switch(emote){
+        case "shronk":
+            //Return image tag
+        break;
+    }
+
+    return match;
+}
 
 //Setup materialize components
 document.addEventListener('DOMContentLoaded', function() {
@@ -282,4 +307,65 @@ async function sendTranslatedMessage(message,displayName){
         "message": message
     })
     document.getElementById("message-form").reset();
+}
+
+function sendFile(){
+    var displayName;
+    database.ref("users/" + auth.currentUser.uid).once('value', function(snapshot) {
+        try {
+            displayName = snapshot.val().displayName;
+        }
+        catch(e){
+            displayName = auth.currentUser.email;
+        }
+        if(!displayName){
+            displayName = auth.currentUser.email;
+        }
+    }).then( function () {
+        var uploader = document.getElementById("uploader");
+        var fileButton = document.getElementById("file-select");
+        var submitButton = document.getElementById("submitButton");
+        //Listen for file selection
+        //Get the file
+        var file = fileButton.files[0];
+        //Create a storage ref
+        var storageRef = firebase.storage().ref(file.name);
+        //Upload file
+        var task = storageRef.put(file);
+        //Update progress bar
+        task.on('state_changed',
+        function progress(snapshot) {
+            var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            uploader.value = percentage;
+        },
+        function error(err){
+
+        },
+        function complete() {
+            storageRef.getDownloadURL().then(function(url) {
+            console.log(url);
+
+            const fileLink = {url,filename : file.name, displayname : displayName, messagethread : threadID};
+            const options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(fileLink)
+            };
+            sendFileAsync(options,url);
+
+            //var messages = document.getElementById("messages");
+            //messages.innerHTML += `<a href="${url} download" >Download here</a>`;
+            })
+        }
+        );
+    });
+}
+
+async function sendFileAsync(options){
+    const response = await fetch('/sendfile', options);
+    const data = await response.json();
+    
+    console.log("Data: " + data.isclean);
 }
