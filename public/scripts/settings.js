@@ -408,6 +408,7 @@ function updateProfile(){
         });
 
         document.getElementById("email").innerHTML = email;
+        document.getElementById("change-email").value = "";
     }
 
     const username = document.getElementById("name-field").value;
@@ -423,6 +424,7 @@ function updateProfile(){
                     "admin": snapshot.val().admin
                 });
                 document.getElementById("display-name").innerHTML = username;
+                document.getElementById("name-field").value = "";
             })
         }).catch(function(error) {
             // An error happened.
