@@ -446,6 +446,10 @@ document.getElementById("message-form").addEventListener('submit' ,(e) => {
 });
 
 async function sendTranslatedMessage(message,displayName){
+
+    //clear textbox
+    document.getElementById("message").value ="";
+
     var fromLang = document.getElementById("translate-from").value;
     var toLang = document.getElementById("translate-to").value;
     console.log("Send from lang: " +fromLang)

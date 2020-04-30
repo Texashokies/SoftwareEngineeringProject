@@ -26,7 +26,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     var selections = document.querySelectorAll('select');
     M.FormSelect.init(selections);
-
+    const adminComponents = document.querySelectorAll(".admin-only");
+    adminComponents.forEach(item => item.style.display = 'none');
     setupUIIssues();
 
 });
@@ -51,6 +52,8 @@ const setupUIIssues = (user) => {
         //Toggle UI elements
         loggedInComponents.forEach(item => item.style.display = "none");
         loggedOutComponents.forEach(item => item.style.display = 'block');
+        const adminComponents = document.querySelectorAll(".admin-only");
+        adminComponents.forEach(item => item.style.display = 'none');
     }
     setDisplayAccordingToTheme();
 }
@@ -300,6 +303,10 @@ database.ref("bugreports").on("child_added", function(snapshot) {
 
     document.getElementById("reported-list").innerHTML += html;
     setDisplayAccordingToTheme();
+    if(!auth.currentUser){
+        const adminComponents = document.querySelectorAll(".admin-only");
+        adminComponents.forEach(item => item.style.display = 'none');
+    }
 })
 
 database.ref("report-looked").on("child_added", function(snapshot) {
@@ -319,6 +326,10 @@ database.ref("report-looked").on("child_added", function(snapshot) {
     '</div>' + '</li>';
 
     document.getElementById("looked-at-list").innerHTML += html;
+    if(!auth.currentUser){
+        const adminComponents = document.querySelectorAll(".admin-only");
+        adminComponents.forEach(item => item.style.display = 'none');
+    }
 })
 
 database.ref("report-fixed").on("child_added", function(snapshot) {
@@ -338,6 +349,10 @@ database.ref("report-fixed").on("child_added", function(snapshot) {
     '</div>' + '</li>';
 
     document.getElementById("fixed-bug-list").innerHTML += html;
+    if(!auth.currentUser){
+        const adminComponents = document.querySelectorAll(".admin-only");
+        adminComponents.forEach(item => item.style.display = 'none');
+    }
 })
 
 function addReport(description){
@@ -591,3 +606,91 @@ function editReport(htmlid){
     document.getElementById("edit-form-" + reportID).reset();
     document.getElementById("modal-li-" + reportID).innerHTML = "";
 }
+
+//Login
+//Not in auth because modals get fussy
+const loginForm = document.querySelector("#login-form");
+loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = loginForm["login-email"].value;
+    const password = loginForm["login-password"].value;
+    const promise = auth.signInWithEmailAndPassword(email,password);
+    promise.catch( function(e) {
+        if(e.code === 'auth/invalid-email'){
+            console.log("Invalid Email");
+            document.getElementById("login-email-helper-text").innerHTML ="Invalid Email Address";
+            document.getElementById("login-password-helper-text").innerHTML ="";
+        }
+        else if (e.code === 'auth/user-disabled'){
+            console.log("Disabled Email");
+            document.getElementById("login-email-helper-text").innerHTML ="This email has been disabled";
+        }
+        else if(e.code === 'auth/user-not-found'){
+            console.log("No user");
+            document.getElementById("login-email-helper-text").innerHTML ="There is no user corresponding to the given email";
+        }
+        else if(e.code === 'auth/wrong-password'){
+            console.log("Wrong password");
+            document.getElementById("login-password-helper-text").innerHTML ="Incorrect Password";
+            document.getElementById("login-email-helper-text").innerHTML ="";
+        }
+        else{
+            alert(e);
+        }
+    });
+    //Close modal and reset form
+    const modal = document.querySelector("#modal-login");
+    M.Modal.getInstance(modal).close();
+    loginForm.reset();
+});
+
+//Signup
+//Not in auth because modals get fussy
+const signupForm = document.querySelector('#signup-form');
+signupForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const email = signupForm['signup-email'].value;
+    const password = signupForm['signup-password'].value
+
+    firebase.auth().createUserWithEmailAndPassword(email, password).then( function(cred){
+        console.log(cred.user);
+
+        const username = signupForm['username'].value;
+        auth.currentUser.updateProfile({
+            displayName: username
+        })
+
+        database.ref("users/" + auth.currentUser.uid).set({
+            "displayName": username,
+            "admin": false
+        });
+
+        const modal = document.querySelector('#modal-signup');
+        M.Modal.getInstance(modal).close();
+        signupForm.reset();
+        //Deal with any errors
+    }).catch (function(e){
+        console.log("Error: " + e);
+        if(e.code === 'auth/invalid-email'){
+            console.log("Invalid email");
+            document.getElementById("signup-email-helper-text").innerHTML = "Invalid Email";
+            document.getElementById("signup-password-helper-text").innerHTML = "";
+        }
+        else if(e.code === 'auth/user-disabled'){
+            document.getElementById("signup-email-helper-text").innerHTML = "User Disabled";
+            document.getElementById("signup-password-helper-text").innerHTML = "";
+        }
+        else if(e.code === 'auth/user-not-found'){
+            document.getElementById("signup-email-helper-text").innerHTML = "User not found";
+            document.getElementById("signup-password-helper-text").innerHTML = "";
+        }
+        else if(e.code === 'auth/wrong-password'){
+            document.getElementById("signup-email-helper-text").innerHTML = "";
+            document.getElementById("signup-password-helper-text").innerHTML = "Wrong Password";
+        }
+        else{
+            alert(e.code)
+        }
+    });
+});

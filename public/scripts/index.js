@@ -41,7 +41,7 @@ function randomizeQuote(){
         author.innerHTML = "-Spock";
     }
     else if(num ==2){
-        quote.innerHTML = "Who actuall reads these?";
+        quote.innerHTML = "Who actually reads these?";
         author.innerHTML = "-The Developers";
     }
     else if (num == 3){

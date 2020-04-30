@@ -61,7 +61,7 @@ authentication.onAuthStateChanged(user => {
             setupUIChat(user);
         }
         catch(err){
-            
+            console.log(err);
         }
         try {
             setupUIContacts(user);

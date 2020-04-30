@@ -15,7 +15,13 @@
         <div class="nav-wrapper amber darken-2" id="nav-wrapper">
             <a href="index.html" class="brand-logo" id="logo">Firechat</a>
             <ul id ="nav-mobile" class="right hid-on-med-down">
-                <li class= "logged-in">
+                <li class = "logged-in">
+                    <a href="contacts.html" id="contacts-link"><i class="material-icons">contacts</i></a>
+                </li>
+                <li>
+                    <a href="issues.html"> <i class="material-icons tiny">bug_report</i></a>
+                </li>
+                <li class = "logged-in">
                     <a href="#" class="dropdown-trigger amber lighten-1 btn" data-target="accountDropdown" id="account-dropdown"><i class="material-icons">account_circle</i></a>
                 </li>
                 <li class="logged-out">
@@ -28,13 +34,13 @@
     <!--Account dropdown-->
     <ul id="accountDropdown" class="dropdown-content">
         <li><a href="settings.html" class = "black-text"> <i class="small material-icons">settings</i> Settings</a></li>
-        <li><a href="#!" class = "btn-flat black-text"><i class="small material-icons">input</i> Signout</a></li>
+        <li><a href="#!" class = "btn-flat black-text" id="logout"><i class="small material-icons">input</i> Signout</a></li>
     </ul>
 
     <!--Login dropdown-->
     <ul id="loginDropdown" class="dropdown-content">
-        <li><a href="#!" class = "black-text btn-flat"> <i class="small material-icons">input</i> Login</a></li>
-        <li><a href="#!" class = "btn-flat black-text"><i class="small material-icons">input</i> Signup</a></li>
+        <li><a href="#!" class = "black-text btn-flat modal-trigger" data-target="modal-login"> <i class="small material-icons">input</i> Login</a></li>
+        <li><a href="#!" class = "btn-flat black-text modal-trigger" data-target="modal-signup"><i class="small material-icons">input</i> Signup</a></li>
     </ul>
 
     <!--Doesn't matter if logged in or out-->
@@ -135,6 +141,50 @@
                     <button class="btn red accent-4">DELETE! <i class="small material-icons">delete_forever</i></button>
                 </form>
             </div>
+        </div>
+    </div>
+
+     <!-- SIGN UP MODAL -->
+     <div id="modal-signup" class="modal">
+        <div class="modal-content">
+        <h4>Sign up</h4><br />
+        <form id="signup-form">
+            <div class="input-field">
+                <input type="text" id="username" required/>
+                <label for="username">Username</label>
+            </div>
+            <div class="input-field">
+                <input type="email" id="signup-email" required />
+                <label for="signup-email">Email address</label>
+                <span class="helper-text red-text" data-error="wrong" data-success="right" id="signup-email-helper-text"></span>
+            </div>
+            <div class="input-field">
+                <input type="password" id="signup-password" required />
+                <label for="signup-password">Choose password</label>
+                <span class="helper-text red-text" data-error="wrong" data-success="right" id="signup-password-helper-text"></span>
+            </div>
+            <button class="btn yellow darken-2 no-modal" id="sign-in-button-modal">Sign up</button>
+        </form>
+        </div>
+    </div>
+
+    <!-- LOGIN MODAL -->
+    <div id="modal-login" class="modal">
+        <div class="modal-content">
+        <h4>Login</h4>
+        <form id="login-form">
+            <div class="input-field">
+                <input type="email" id="login-email" required />
+                <label for="login-email">Email address</label>
+                <span class="helper-text red-text" data-error="wrong" data-success="right" id="login-email-helper-text"></span>
+            </div>
+            <div class="input-field">
+                <input type="password" id="login-password" required />
+                <label for="login-password">Your password</label>
+                <span class="helper-text red-text" data-error="wrong" data-success="right" id="login-password-helper-text"></span>
+            </div>
+            <button class="btn yellow darken-2 no-modal" id="login-button">Login</button>
+        </form>
         </div>
     </div>
 
