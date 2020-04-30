@@ -416,36 +416,31 @@ function startMessageThread(htmlid){
             threadID = snapshot.key;
             console.log(threadID);
         }
-    }).then(
-        function() {
-            database.ref("messages/" + pairValue2).once('value', function(snapshot){
-                if(snapshot.val() != null){
-                    console.log("Pair value 2 exists")
-                    pairTwoExist =true;
-                    console.log(threadID);
-                    threadID = snapshot.key;
-                    console.log(threadID);
+        database.ref("messages/" + pairValue2).once('value', function(snapshot){
+            if(snapshot.val() != null){
+                console.log("Pair value 2 exists")
+                pairTwoExist =true;
+                console.log(threadID);
+                threadID = snapshot.key;
+                console.log(threadID);
+            }
+            else{
+                console.log("Pair value 2 does not exists")
+                console.log(threadID);
+                if(!pairOneExist){
+                    database.ref("messages/" + pairValue1).push().set({
+                        sender: "ignore",
+                        message: "Report a bug if you see me!"
+                    })
+                    threadID = pairValue1;
                 }
-                else{
-                    console.log("Pair value 2 does not exists")
-                    console.log(threadID);
-                    if(!pairOneExist){
-                        database.ref("messages/" + pairValue1).push().set({
-                            sender: "ignore",
-                            message: "Report a bug if you see me!"
-                        })
-                    }
-                }
-            }).then(
-                function() {
-                    console.log(threadID);
-                    var url = "/chat.html?thread=" + threadID;
-                    //console.log(url);
-                    document.location.href = url;
-                }
-            );
-        }
-    );
+            }
+                console.log(threadID);
+                var url = "/chat.html?thread=" + threadID;
+                //console.log(url);
+                document.location.href = url;
+        });
+    });
 }
 
 function cantorPair(k1,k2){
