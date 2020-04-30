@@ -155,6 +155,12 @@ function replaceWithEmote(match){
         case "mike":
             return '<img src="icons/mike.jpg" alternate="Star trek nerd.">'
         break;
+        case "prof":
+            return '<img src="icons/JoaquinMPalacios-1.jpeg" alternate="The professor.">'
+        break;
+        case "naughty-boy":
+            return '<img src="icons/JoaquinMPalacios-1.jpeg" alternate="The professor.">'
+        break;
     }
 
     return match;
