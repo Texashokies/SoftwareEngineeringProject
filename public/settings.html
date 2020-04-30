@@ -130,12 +130,12 @@
                                 <label for="change-email">Change Email Address</label>
                             </div>
                             <!--Change password by a password reset email-->
-                            <button class="btn waves-effect waves-light yellow darken-2" id="change-password">Change Password <i class="small material-icons">lock</i></button>
+                            <button class="btn waves-effect waves-light yellow darken-2" id="change-password"  onclick="resetPassword();"    >Change Password <i class="small material-icons">lock</i></button>
                         </form>
                     </div>
                     <div class="card-action">
                         <!--Might need to be changed to a button?-->
-                        <a href="#" class="wave-effect waves-light btn yellow darken-2" data-target="modal-login" id="user-profile-save-button">Save Settings <i class="small material-icons">save</i></a>
+                        <a href="#" class="wave-effect waves-light btn yellow darken-2" data-target="modal-login" id="user-profile-save-button" onclick="updateProfile();">Save Settings <i class="small material-icons">save</i></a>
                     </div>
                 </div>
             </div>
@@ -186,7 +186,7 @@
                 <form id = "delete-modal-form">
                     <p>Please think carefully about this decision. Deleting your account is a permanent action that cannot be undone!</p>
                     <button class="btn  yellow darken-2" id="nevermind-button">Nevermind.</button>
-                    <button class="btn red accent-4">DELETE ACCOUNT! <i class="small material-icons">delete_forever</i></button>
+                    <button class="btn red accent-4"  onclick="deleteAccount();" >DELETE ACCOUNT! <i class="small material-icons">delete_forever</i></button>
                 </form>
             </div>
         </div>

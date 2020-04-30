@@ -259,4 +259,60 @@ signupForm.addEventListener('submit', (e) => {
             alert(e.code)
         }
     });
+
+    
 });
+
+function updateProfile(){
+        const email = document.getElementById("change-email").value;
+        console.log(email);
+
+var user = firebase.auth().currentUser;
+
+if (email == "")
+{}
+   
+else
+{
+user.updateEmail(email).then(function() {
+  // Update successful.
+console.log("success");
+}).catch(function(error) {
+  // An error happened.
+console.log(error);
+});
+}
+const username = document.getElementById("name-field").value;
+console.log(username);
+
+auth.currentUser.updateProfile({displayName:username}).then(function() {
+  // Update successful.
+console.log(user.displayName);
+
+}).catch(function(error) {
+  // An error happened.
+});
+}
+
+function resetPassword(){
+
+var emailAddress = auth.currentUser.email;
+
+auth.sendPasswordResetEmail(emailAddress).then(function() {
+  // Email sent.
+}).catch(function(error) {
+  // An error happened.
+});
+
+}
+
+function deleteAccount(){
+
+var user = firebase.auth().currentUser;
+
+user.delete().then(function() {
+  // User deleted.
+console.log("success");
+}).catch(function(error) {
+  // An error happened.
+});}
