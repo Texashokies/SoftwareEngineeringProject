@@ -128,6 +128,9 @@ function replaceWithEmote(match){
         case "jeb":
             return '<img src="icons/jeb.png" alternate="Jeb bush wins!">'
         break;
+        case "jebright":
+            return '<img src="icons/jebright.png" alternate="Jeb bush wins!">'
+        break; 
         case "todd":
             return '<img src="icons/todd.png" alternate="Todd Howard">'
         break;
