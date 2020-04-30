@@ -591,7 +591,7 @@ function editReport(htmlid){
             });
         }
         else{
-            database.ref("bugreport/").push().set({
+            database.ref("bugreports/").push().set({
                 "description": description,
                 "response": response
             });
