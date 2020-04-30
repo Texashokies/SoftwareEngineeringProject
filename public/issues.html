@@ -67,24 +67,6 @@
             </li>
           </ul>
 
-        <!--Bug report card template remove when done-->
-        <div class="row">
-            <div class = "col s11 m6">
-                <div class="card" id="test-card">
-                    <div class="card-content">
-                        <span class="card-title">Bug report: </span>
-                        <p id="description">Description:</p>
-
-                        <p id="dev-response">Developer Response:</p>
-                    </div>
-                    <div class="card-action">
-                        <a href="#"class="waves-effect waves-light btn yellow darken-2 admin-only modal-trigger" data-target="modal-edit"> <i class="material-icons">build</i>Edit</a>
-                        <a href="#" class="waves-effect waves-light btn red darken-2 admin-only modal-trigger" data-target="modal-delete"> <i class="material-icons">delete</i> Delete</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!--Report bug card-->
         <div class="row">
             <div class = "col s11 m6">
@@ -94,11 +76,15 @@
                         <p>Found a bug? Please tell us as much as you can.</p>
                     </div>
                     <div class="card-action">
-                        <a href="#"class="waves-effect waves-light btn yellow darken-2 admin-only modal-trigger" data-target="modal-report"> <i class="material-icons ">bug_report</i>Report</a>
+                        <a href="#"class="waves-effect waves-light btn yellow darken-2 modal-trigger" data-target="modal-report"> <i class="material-icons ">bug_report</i>Report</a>
                     </div>
                 </div>
             </div>
         </div>
+
+        <ul id="edit-modals">
+            
+        </ul>
 
         <!--Bug Report Edit Modal-->
         <div id ="modal-edit" class="modal">
@@ -114,12 +100,12 @@
                         <label for="edit-bug-description">Response</label>
                     </div>
                     <div class="input-field col s12">
-                            <select id="select-priority">
-                              <option value="fixed">Fixed</option>
-                              <option value="looked-at">Being Looked At</option>
-                              <option value="reported">Reported</option>
-                            </select>
-                            <label>Edit Priority<i class="material-icons tiny">swap_vert</i></label>
+                        <select id="select-priority">
+                            <option value="fixed">Fixed</option>
+                            <option value="looked-at">Being Looked At</option>
+                            <option value="reported">Reported</option>
+                        </select>
+                        <label>Edit Priority<i class="material-icons tiny">swap_vert</i></label>
                     </div>
                 </form>
             </div>
@@ -128,11 +114,12 @@
         <!--Bug Report Modal-->
         <div id ="modal-report" class="modal">
             <div class="modal-content">
-                <h4 id="edit-bug-report">Edit Bug report: </h4>
-                <form id="edit-form">
+                <h4 id="send-bug-report">Send Bug report: </h4>
+                <form id="report-form">
                     <div class="input-field">
                         <input type="text" id="report-bug-description" required />
                         <label for="report-bug-description">Description</label>
+                        <button class="btn no-modal" id="report-bug-button"> <i class="material-icons">bug_report</i> Report</button>
                     </div>
                 </form>
             </div>

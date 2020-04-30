@@ -87,7 +87,7 @@ window.onload = function () {
                 }
                 else{
                     var message = snapshot.val().message;
-                    emoteMessage(message);
+                    message = emoteMessage(message);
                     var html = 
                     '<li id="message-"' + snapshot.key + '>' +
                     '<div class="card">'+
@@ -113,6 +113,7 @@ function emoteMessage(message){
 
     var newstring = message.replace(regexp,replaceWithEmote);
     console.log(newstring);
+    return newstring;
     /*
     for(const match of matches) {
         //compare match against list of emotes and then replace.
@@ -124,9 +125,18 @@ function replaceWithEmote(match){
     var emote = match.substring(1,match.length-1);
     
     switch(emote){
-        case "shronk":
-            //Return image tag
+        case "jeb":
+            return '<img src="icons/jeb.png" alternate="Jeb bush wins!">'
         break;
+        case "todd":
+            return '<img src="icons/todd.png" alternate="Todd Howard">'
+        break;
+        case "god":
+            return '<img src="icons/avatar.jpg" alternate="A developer">'
+        break;
+        case "pain":
+            return '<img src="icons/pain.jpg" alternate="Expression of the pain caused by this project.">'
+            break;
     }
 
     return match;
