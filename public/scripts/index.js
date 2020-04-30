@@ -201,6 +201,84 @@ function setDisplayAccordingToTheme(){
                     dropdowns[i].className= "dropdown-content black-text grey darken-1";
                 }
             }
+            else if(theme == "swamp"){
+                document.body.className = "green darken-2";
+                document.getElementById("nav-wrapper").className =  "nav-wrapper green darken-4";
+                document.getElementById("logo").className = "brand-logo brown-text darken-4";
+                var cards = document.querySelectorAll(".card");
+                for(var i =0; i< cards.length;i++){
+                    cards[i].className = "card green darken-3 brown-text darken-4";
+                }
+                var buttons = document.querySelectorAll(".btn");
+                for(var i=0;i<buttons.length;i++){
+                    if(!buttons[i].className.includes('no-modal')){
+                        buttons[i].className  ="wave-effect waves-light btn green darken-2 modal-trigger";
+                    }
+                    else{
+                        buttons[i].className  ="wave-effect waves-light btn green darken-2 no-modal";
+                    }
+                }
+                var modals = document.querySelectorAll(".modal");
+                for(var i=0;i<modals.length;i++){
+                    modals[i].className ="modal green darken-2 brown-text darken-4";
+                }
+                var dropdowns = document.querySelectorAll(".dropdown-content");
+                for(var i=0;i<dropdowns.length;i++){
+                    dropdowns[i].className= "dropdown-content brown-text grey darken-4";
+                }
+            }
+            else if(theme == "aqua"){
+                document.body.className = "cyan darken-2";
+                document.getElementById("nav-wrapper").className =  "nav-wrapper cyan darken-4";
+                document.getElementById("logo").className = "brand-logo white-text";
+                var cards = document.querySelectorAll(".card");
+                for(var i =0; i< cards.length;i++){
+                    cards[i].className = "card teal darken-2 white-text";
+                }
+                var buttons = document.querySelectorAll(".btn");
+                for(var i=0;i<buttons.length;i++){
+                    if(!buttons[i].className.includes('no-modal')){
+                        buttons[i].className  ="wave-effect waves-light btn teal darken-2 modal-trigger";
+                    }
+                    else{
+                        buttons[i].className  ="wave-effect waves-light btn teal darken-2 no-modal";
+                    }   
+                }
+                var modals = document.querySelectorAll(".modal");
+                for(var i=0;i<modals.length;i++){
+                    modals[i].className ="modal teal darken-2 white-text";
+                }
+                var dropdowns = document.querySelectorAll(".dropdown-content");
+                for(var i=0;i<dropdowns.length;i++){
+                    dropdowns[i].className= "dropdown-content white-text cyan darken-4";
+                }
+            }
+            else if(theme == "mocha"){
+                document.body.className = "brown darken-4";
+                document.getElementById("nav-wrapper").className =  "nav-wrapper brown darken-3";
+                document.getElementById("logo").className = "brand-logo white-text";
+                var cards = document.querySelectorAll(".card");
+                for(var i =0; i< cards.length;i++){
+                    cards[i].className = "card brown darken-2 white-text";
+                }
+                var buttons = document.querySelectorAll(".btn");
+                for(var i=0;i<buttons.length;i++){
+                    if(!buttons[i].className.includes('no-modal')){
+                        buttons[i].className  ="wave-effect waves-light btn brown darken-2 modal-trigger";
+                    }
+                    else{
+                        buttons[i].className  ="wave-effect waves-light btn brown darken-2 no-modal";
+                    }
+                }
+                var modals = document.querySelectorAll(".modal");
+                for(var i=0;i<modals.length;i++){
+                    modals[i].className ="modal brown darken-2 white-text";
+                }
+                var dropdowns = document.querySelectorAll(".dropdown-content");
+                for(var i=0;i<dropdowns.length;i++){
+                    dropdowns[i].className= "dropdown-content white-text brown darken-4";
+                }
+            }
             else{
                 document.body.className = "";
                 document.getElementById("account-warning").className = "center-align";
