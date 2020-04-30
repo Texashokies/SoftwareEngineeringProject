@@ -358,7 +358,7 @@ function setDisplayAccordingToTheme(){
                 document.getElementById("logo").className = "brand-logo";
                 var cards = document.querySelectorAll(".card");
                 for(var i =0; i< cards.length;i++){
-                    cards[i].className = "card";
+                    cards[i].className = "card black-text";
                 }
                 var buttons = document.querySelectorAll(".btn");
                 for(var i=0;i<buttons.length;i++){
@@ -386,7 +386,7 @@ function setDisplayAccordingToTheme(){
         document.getElementById("logo").className = "brand-logo";
         var cards = document.querySelectorAll(".card");
         for(var i =0; i< cards.length;i++){
-            cards[i].className = "card";
+            cards[i].className = "card black-text";
         }
         var buttons = document.querySelectorAll(".btn");
         for(var i=0;i<buttons.length;i++){

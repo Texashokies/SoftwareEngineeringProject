@@ -95,7 +95,12 @@ function setDisplayAccordingToTheme() {
                 }
                 var buttons = document.querySelectorAll(".btn");
                 for(var i=0;i<buttons.length;i++){
-                    buttons[i].className  ="wave-effect waves-light btn orange darken-2 modal-trigger";
+                    if(!buttons[i].className.includes('no-modal')){
+                        buttons[i].className  ="wave-effect waves-light btn orange darken-2 modal-trigger";
+                    }
+                    else{
+                        buttons[i].className  ="wave-effect waves-light btn orange darken-2 no-modal";
+                    }
                 }
                 var modals = document.querySelectorAll(".modal");
                 for(var i=0;i<modals.length;i++){
@@ -116,7 +121,12 @@ function setDisplayAccordingToTheme() {
                 }
                 var buttons = document.querySelectorAll(".btn");
                 for(var i=0;i<buttons.length;i++){
-                    buttons[i].className  ="wave-effect waves-light btn blue darken-2 modal-trigger";
+                    if(!buttons[i].className.includes('no-modal')){
+                        buttons[i].className  ="wave-effect waves-light btn blue darken-2 modal-trigger";
+                    }
+                    else{
+                        buttons[i].className  ="wave-effect waves-light btn blue darken-2 no-modal";
+                    }
                 }
                 var modals = document.querySelectorAll(".modal");
                 for(var i=0;i<modals.length;i++){
@@ -125,6 +135,115 @@ function setDisplayAccordingToTheme() {
                 var dropdowns = document.querySelectorAll(".dropdown-content");
                 for(var i=0;i<dropdowns.length;i++){
                     dropdowns[i].className= "dropdown-content black-text grey darken-1";
+                }
+            }
+            else if(theme == "swamp"){
+                document.body.className = "green darken-2";
+                document.getElementById("nav-wrapper").className =  "nav-wrapper green darken-4";
+                document.getElementById("logo").className = "brand-logo brown-text darken-4";
+                var cards = document.querySelectorAll(".card");
+                for(var i =0; i< cards.length;i++){
+                    cards[i].className = "card green darken-3 brown-text darken-4";
+                }
+                var buttons = document.querySelectorAll(".btn");
+                for(var i=0;i<buttons.length;i++){
+                    if(!buttons[i].className.includes('admin-only')){
+                        if(!buttons[i].className.includes('no-modal')){
+                            buttons[i].className  ="wave-effect waves-light btn green darken-2 modal-trigger";
+                        }
+                        else{
+                            buttons[i].className  ="wave-effect waves-light btn green darken-2 no-modal";
+                        }
+                    }
+                    else{
+                        buttons[i].className  ="wave-effect waves-light btn green darken-2 no-modal admin-only logged-in";
+                    }
+                }
+                var modals = document.querySelectorAll(".modal");
+                for(var i=0;i<modals.length;i++){
+                    modals[i].className ="modal green darken-2 brown-text darken-4";
+                }
+                var dropdowns = document.querySelectorAll(".dropdown-content");
+                for(var i=0;i<dropdowns.length;i++){
+                    dropdowns[i].className= "dropdown-content brown-text grey darken-4";
+                }
+                var collapsables = document.querySelectorAll(".collapsible-header");
+                var collapsables = document.querySelectorAll(".collapsible-header");
+                for(var i =0;i<collapsables.length;i++){
+                    collapsables[i].className = "collapsible-header green darken-2 brown-text darken-4";
+                }
+            }
+            else if(theme == "aqua"){
+                document.body.className = "cyan darken-2";
+                document.getElementById("nav-wrapper").className =  "nav-wrapper cyan darken-4";
+                document.getElementById("logo").className = "brand-logo white-text";
+                var cards = document.querySelectorAll(".card");
+                for(var i =0; i< cards.length;i++){
+                    cards[i].className = "card teal darken-2 white-text";
+                }
+                var buttons = document.querySelectorAll(".btn");
+                for(var i=0;i<buttons.length;i++){
+                    if(!buttons[i].className.includes('admin-only')){
+                        if(!buttons[i].className.includes('no-modal')){
+                            buttons[i].className  ="wave-effect waves-light btn teal darken-2 modal-trigger";
+                        }
+                        else{
+                            buttons[i].className  ="wave-effect waves-light btn teal darken-2 no-modal";
+                        }
+                    }
+                    else{
+                        buttons[i].className  ="wave-effect waves-light btn teal darken-2 no-modal admin-only logged-in";
+                    }
+                    
+                }
+                var modals = document.querySelectorAll(".modal");
+                for(var i=0;i<modals.length;i++){
+                    modals[i].className ="modal teal darken-2 white-text";
+                }
+                var dropdowns = document.querySelectorAll(".dropdown-content");
+                for(var i=0;i<dropdowns.length;i++){
+                    dropdowns[i].className= "dropdown-content white-text cyan darken-4";
+                }
+                var collapsables = document.querySelectorAll(".collapsible-header");
+                var collapsables = document.querySelectorAll(".collapsible-header");
+                for(var i =0;i<collapsables.length;i++){
+                    collapsables[i].className = "collapsible-header cyan darken-2 blue-text";
+                }
+            }
+            else if(theme == "mocha"){
+                document.body.className = "brown darken-4";
+                document.getElementById("nav-wrapper").className =  "nav-wrapper brown darken-3";
+                document.getElementById("logo").className = "brand-logo white-text";
+                var cards = document.querySelectorAll(".card");
+                for(var i =0; i< cards.length;i++){
+                    cards[i].className = "card brown darken-2 white-text";
+                }
+                var buttons = document.querySelectorAll(".btn");
+                for(var i=0;i<buttons.length;i++){
+                    if(!buttons[i].className.includes('admin-only')){
+                        if(!buttons[i].className.includes('no-modal')){
+                            buttons[i].className  ="wave-effect waves-light btn brown darken-2 modal-trigger";
+                        }
+                        else{
+                            buttons[i].className  ="wave-effect waves-light btn brown darken-2 no-modal";
+                        }
+                    }
+                    else{
+                        buttons[i].className  ="wave-effect waves-light btn brown darken-2 no-modal admin-only logged-in";
+                    }
+                }
+                var modals = document.querySelectorAll(".modal");
+                for(var i=0;i<modals.length;i++){
+                    modals[i].className ="modal brown darken-2 white-text";
+                }
+                var dropdowns = document.querySelectorAll(".dropdown-content");
+                for(var i=0;i<dropdowns.length;i++){
+                    dropdowns[i].className= "dropdown-content white-text brown darken-4";
+                }
+                var collapsables = document.querySelectorAll(".collapsible-header");
+                var collapsables = document.querySelectorAll(".collapsible-header");
+                for(var i =0;i<collapsables.length;i++){
+                    collapsables[i].className = "collapsible-header brown darken-2 brown-text darken-4";
                 }
             }
             else{
@@ -137,7 +256,12 @@ function setDisplayAccordingToTheme() {
                 }
                 var buttons = document.querySelectorAll(".btn");
                 for(var i=0;i<buttons.length;i++){
-                    buttons[i].className  ="wave-effect waves-light btn yellow darken-2 modal-trigger";
+                    if(!buttons[i].className.includes('no-modal')){
+                        buttons[i].className  ="wave-effect waves-light btn yellow darken-2 modal-trigger";
+                    }
+                    else{
+                        buttons[i].className  ="wave-effect waves-light btn yellow darken-2 no-modal";
+                    }
                 }
                 var modals = document.querySelectorAll(".modal");
                 for(var i=0;i<modals.length;i++){
@@ -160,7 +284,12 @@ function setDisplayAccordingToTheme() {
         }
         var buttons = document.querySelectorAll(".btn");
         for(var i=0;i<buttons.length;i++){
-            buttons[i].className  ="wave-effect waves-light btn yellow darken-2 modal-trigger";
+            if(!buttons[i].className.includes('no-modal')){
+                buttons[i].className  ="wave-effect waves-light btn yellow darken-2 modal-trigger";
+            }
+            else{
+                buttons[i].className  ="wave-effect waves-light btn yellow darken-2 no-modal";
+            }
         }
         var modals = document.querySelectorAll(".modal");
         for(var i=0;i<modals.length;i++){
@@ -264,55 +393,63 @@ signupForm.addEventListener('submit', (e) => {
 });
 
 function updateProfile(){
-        const email = document.getElementById("change-email").value;
-        console.log(email);
+    const email = document.getElementById("change-email").value;
+    console.log(email);
 
-var user = firebase.auth().currentUser;
+    var user = firebase.auth().currentUser;
 
-if (email == "")
-{}
-   
-else
-{
-user.updateEmail(email).then(function() {
-  // Update successful.
-console.log("success");
-}).catch(function(error) {
-  // An error happened.
-console.log(error);
-});
-}
-const username = document.getElementById("name-field").value;
-console.log(username);
+    if (!(email == "")){
+        user.updateEmail(email).then(function() {
+            // Update successful.
+            console.log("success");
+        }).catch(function(error) {
+            // An error happened.
+            console.log(error);
+        });
 
-auth.currentUser.updateProfile({displayName:username}).then(function() {
-  // Update successful.
-console.log(user.displayName);
+        document.getElementById("email").innerHTML = email;
+    }
 
-}).catch(function(error) {
-  // An error happened.
-});
+    const username = document.getElementById("name-field").value;
+    console.log(username);
+
+    if(!(username == "")){
+        auth.currentUser.updateProfile({displayName:username}).then(function() {
+            // Update successful.
+            console.log(user.displayName);
+            database.ref("users/" + auth.currentUser.uid).once('value', function(snapshot){
+                database.ref("users/" + auth.currentUser.uid).set({
+                    "displayName": username,
+                    "admin": snapshot.val().admin
+                });
+                document.getElementById("display-name").innerHTML = username;
+            })
+        }).catch(function(error) {
+            // An error happened.
+        });
+    }
+    
 }
 
 function resetPassword(){
 
-var emailAddress = auth.currentUser.email;
+    var emailAddress = auth.currentUser.email;
 
-auth.sendPasswordResetEmail(emailAddress).then(function() {
-  // Email sent.
-}).catch(function(error) {
-  // An error happened.
-});
+    auth.sendPasswordResetEmail(emailAddress).then(function() {
+    // Email sent.
+    }).catch(function(error) {
+    // An error happened.
+    });
 
 }
 
 function deleteAccount(){
 
-var user = firebase.auth().currentUser;
-
-user.delete().then(function() {
-  // User deleted.
-console.log("success");
-}).catch(function(error) {
-  // An error happened.
-});}
+    var user = firebase.auth().currentUser;
+    user.delete().then(function() {
+    // User deleted.
+    console.log("success");
+    }).catch(function(error) {
+    // An error happened.
+    });
+}
